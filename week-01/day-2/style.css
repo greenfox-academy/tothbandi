@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+header, article {
+    padding: 0 10% 0 10%;
+
+}
+
+header {
+    font-family: 'Spectral SC', courier;
+    background-color: #333333;
+    
+}
+
+h1 {
+    font-size: xx-large;
+    padding-top: 10%;
+}
+
+h2 {
+    font-size: x-large;
+}
+
+p, dd {
+    font-size: large;
+}
+
+dt {
+    font-size: x-large;
+}
+
+nav {
+    padding: 1%;
+    text-align: right;
+    
+}
+
+a {
+    color: #ff0099;
+    padding: 0 1% 0 1%;
+
+}
+
+.TA_heading {
+    color: #ff0099;
+}
+
+.separator {
+    text-align: center;
+}
+
+img {
+    float: left;
+    padding-top: 10px;
+    
+}
+
+.wiki_heading {
+    text-align: center; 
+}
