@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 5px;
+}
+
+p {
+    display: inline-block;
+    width: 136px;
+    height: 80px;
+    font-size: 24px;
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+    padding-top: 54px;
+    margin: 10px;
+    background-color: turquoise;
+    border-radius: 100%;
+}
+
+article:first-of-type > p:first-of-type {
+    background-color: purple;
+}
+
+article:last-of-type > p:last-of-type {
+    background-color: orange;
+}
