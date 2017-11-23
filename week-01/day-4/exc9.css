@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 16px;
+}
+
+h1{
+    padding-bottom: 16px;
+}
+
+p{
+    font-size: 18px;
+    width: 300px;
+    padding: 16px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px 2px;
+}
+
+p:hover{
+    background-color: red;
+}

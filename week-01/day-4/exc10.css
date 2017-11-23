@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p{
+
+    font-family: courier;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    width: 200px;
+    padding: 16px;
+    margin: 8px;
+    background: url('duck.png');
+    background-repeat: no-repeat;
+    
+}
+
+p:first-of-type{
+    background-color: red;
+    background-size: 30%;
+    background-position: center left;
+   
+}
+
+p:nth-of-type(2){
+    background-color: purple;
+    background-size: 50%;
+    background-position: center center;   
+}
+
+p:last-of-type{
+    background-color: gray;
+    background-size: 30%;
+    background-position: bottom right;   
+}
