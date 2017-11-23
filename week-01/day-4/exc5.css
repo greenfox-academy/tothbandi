@@ -24,11 +24,14 @@ ol {
     list-style-type: upper-roman;
 }
 
-.pink {
+ol {
     color: deeppink;
     text-decoration: underline;
 }
 
-.black {
+ol > li:last-child {
     color: black;
+    text-decoration: underline;
+    
+    
 }
