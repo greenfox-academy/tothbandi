@@ -6,28 +6,134 @@
     <link href="style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<form action="">
+<form action="" method="get">
     <h1>Profil</h1>
-    <article>
-        <span><p>Személyes adatok</p></span><span><p>Kapcsolat</p></span>
-    </article>
-    
+        <div class="half panel">
+
+            <h2 class="panel-heading">Személyes adatok</h2>
+
+            <div class="label"><label for="username">Név</label>
+            <div class="redstar">*</div></div>
+            <input type="text" id="username" name="username" required>
+
+            <div class="half panel">
+
+                 <div class="label"><label for="date-of-birth">Születési éved</label>
+                 </div>
+                 <input type="number" id="date-of-birth" placeholder="pl.: 1984" 
+                 name="date-of-birth" >                
+            
+            </div><div class="half panel">
+            
+                <div class="label"><label>Nemed</label>
+                </div>
+                <div class="label">
+                    <input type="radio" id="female"
+                    name="gender" value="female">
+                   <label for="female" class="gen">Nő</label>
+            
+                    <input type="radio" id="male"
+                    name="gender" value="male">
+                    <label for="male"  class="gen">Férfi</label>
+                </div>
+            </div>
+
+            <div class="label"><label>Milyen márkákat szeretsz?</label></div>
+
+            <div class="half panel">
+                <div class="cb-item"><input type="checkbox" id="adidas"
+                    name="brand" value="Adidas">
+                   <label for="adidas" class="brand">Adidas</label>
+                </div>
+                <div class="cb-item"><input type="checkbox" id="apple"
+                    name="brand" value="Apple">
+                   <label for="apple" class="brand">Apple</label>
+                </div> 
+                <div class="cb-item"><input type="checkbox" id="cola"
+                    name="brand" value="Coca-Cola">
+                   <label for="cola" class="brand">Coca-Cola</label>
+                </div> 
+                <div class="cb-item"><input type="checkbox" id="mazda"
+                    name="brand" value="Mazda">
+                   <label for="mazda" class="brand">Mazda</label>
+                </div> 
+                <div class="cb-item"><input type="checkbox" id="nike"
+                    name="brand" value="Nike">
+                   <label for="nike" class="brand">Nike</label>
+                </div> 
+            </div><div class="half panel">
+                <div class="cb-item"><input type="checkbox" id="opel"
+                    name="brand" value="Opel">
+                   <label for="opel" class="brand">Opel</label>
+                </div>    
+                <div class="cb-item"><input type="checkbox" id="ray-ban"
+                   name="brand" value="Ray-Ban">
+                  <label for="ray-ban" class="brand">Ray-Ban</label>
+                </div>   
+                <div class="cb-item"><input type="checkbox" id="star"
+                    name="brand" value="Starbucks">
+                   <label for="star" class="brand">Starbucks</label>
+                </div> 
+                <div class="cb-item"><input type="checkbox" id="tesla"
+                    name="brand" value="Tesla">
+                   <label for="tesla" class="brand">Tesla</label>
+                </div> 
+                <div class="cb-item"><input type="checkbox" id="yahoo"
+                    name="brand" value="Yahoo">
+                   <label for="yahoo" class="brand">Yahoo</label>
+                </div>
+            </div>
+
+            <p class="note">Többet is megjelölhetsz!</p>
+
+        </div><div class="half panel">
+
+            <h2 class="panel-heading">Kapcsolat</h2>
+
+            <div class="label"><label for="tel">Telefonszám</label>
+            <div class="redstar">*</div></div>
+            <input type="tel" id="tel" placeholder="+36 -- --- ----" name="phone" required>
+
+            <div class="label"><label for="emil">E-mail cím</label>
+            <div class="redstar">*</div></div>
+            <input type="email" id="emil" placeholder="nev@domain.hu" name="e-mail" required>
+
+            <div class="label"><label for="face">Facebook profilod</label></div>
+            <input type="url" id="face" placeholder="http://facebook.com/..." name="facebook-profile">            
+            
+            <div class="label"><label for="twit">Twitter profilod</label></div>
+            <input type="text" id="twit" placeholder="http://twitter.com/..." name="twittwr-profile">
+            
+            <div class="label"><label for="house">Milyen házban laksz?</label></div>
+            <input type="text" id="house" placeholder="Válassz típust" list="house-list" name="house">
+            <datalist id="house-list">
+                <option value="családi" label="ház"></option>
+                <option value="társas" label="panel"></option>
+            </datalist>
+        </div>
+        <div class="panel">
+
+            <div class="label"><label for="intro">Bemutatkozás</label>
+                <div class="redstar">*</div></div>
+            <textarea id="intro" name="introduction" required rows="7"
+            placeholder="Írj magadról néhány mondatot!"></textarea>
+
+            <div class="label"><label for="cv">CV feltöltése</label></div>
+            <input type="file" id="cv" name="cv-file" value="">
+
+            <div class="cb-item"><input type="checkbox" id="accept"
+                name="accepted" value="accepted">
+               <label for="accept" class="brand">Elfogadom a
+                    <a href="#"> felhasználási feltételeket.</a></label>
+            </div>            
+
+            <input type="submit" id="ment" value="mentés">
+
+            <input type="reset" id="reset" value="űrlap törlése">
+            
+       </div>
+
 </form>
 
-    <div class="green-background">
-        <div class="header"></div>
-        <div class="article">
-            <div class="outer-span">
-                <div>
-                <span class="inner-span"></span><span class="inner-span"></span>
-                <div class="second">2</div>
-            </div>
-            <div class="third">3</div>
-            </div><div class="outer-span">
-                    <!-- <span class="inner-span"></span><span class="inner-span"></span> -->
-            </div>
-        </div>
-        <div class="footer"></div>
-    </div>
 </body>
 </html>

@@ -1,77 +1,108 @@
 *{
     margin: 0;
     padding: 0;
+    border-radius: 4px;
+    
 }
 
 form {
     box-sizing: border-box;
     background-color: lightgray;
-    padding: 60px;
+    padding: 60px 60px 60px 80px;
     width: 820px;
     margin: auto;
-    
+    font-family: "Arial", sans-serif;
+    border-radius: 0;
 }
 
 h1{
-    padding: 20px;
-    font-family: "Arial", sans-serif;
+    /* padding: 10px; */
+    margin-bottom: 20px;
     font-weight: lighter;
 }
 
-span{
-    display: inline-block;
-    width: 50%;
-}
-
-.green-background{
-    display: block;
+.panel{
+    display:inline-block;
     box-sizing: border-box;
-    background-color: green;
-    padding: 10px 0;
-    width: 620px;
+    padding-right: 20px;
     margin: auto;
-}
-
-.header, .footer{
-    box-sizing: inherit;
-    background-color: yellow;
-    border: solid 15px red;
-    margin: 10px 0;
-}
-
-
-.header{
-    height: 45px;
-}
-
-.footer{
-    height: 180px;
-}
-
-
-.outer-span {
-    display: inline-block;
-    box-sizing: border-box;
-    background-color: yellow;
-    width: 50%;
-    height: 440px;
-    border: solid 15px red;
-    margin: 0;
+    width: 100%;
     vertical-align: top;
 }
 
-
-.inner-span{
-    display: inline-block;
-    box-sizing: border-box;
-    border: solid 1px black;
-    width: 50%;
-    height: 40px;
-    vertical-align: bottom;
+.half{
+    width:50%;
 }
 
-.second, .third{
-    border: solid 1px black;
+.panel-heading{
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    font-weight: lighter;
+}
+
+.label{
+    padding: 15px 0 5px 0;
+}
+
+.cb-item{
+    padding: 5px;
+}
+
+.note{
+    padding: 10px;
+    color: gray;
+}
+
+label, .redstar{
+    font-weight: bold;
+    display: inline;
+}
+
+.gen, .brand{
+    font-weight: lighter;
+    font-size: 1.3em;
+}
+
+.redstar{
+    color: red;
+}
+
+#female, #male, .gen{
+    vertical-align: middle;
+
+}
+
+
+#username, #tel, #emil, #face, #twit, 
+#house, #date-of-birth, #intro, #cv {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3em;
+}
+#intro{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#cv {
+    padding-left: 0px;
+    content: "válassz fájlt";
+}
+
+#ment, #reset{
+    display: inline-block;
+    padding: 10px;
+    text-transform: uppercase;
+}
+#ment{
+    width: 40%;
+    background-color: darkblue;
+    color: white;
+    font-size: 1.3em;
     
 }
-
+#reset{
+    float: right;
+    font-size: 1.1em;
