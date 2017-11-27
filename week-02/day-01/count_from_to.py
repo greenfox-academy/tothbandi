@@ -11,3 +11,12 @@
 # 3
 # 4
 # 5
+
+a = int(input("Enter a number "))
+b = int(input("Enter a second number "))
+
+if b <= a:
+    print("The second number should be bigger")
+else:
+    for i in range(a, b):
+        print(i)
