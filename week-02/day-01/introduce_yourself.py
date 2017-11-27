@@ -8,3 +8,6 @@
 #  John Doe
 #  31
 #  1.87
+print("Tóth András")
+print(47)
+print(1.70)
