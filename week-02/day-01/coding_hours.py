@@ -6,4 +6,6 @@
 #
 # Print the percentage of the coding hours in the semester if the average
 # work hours weekly is 52
+print(6 * 17 * 5)
+print(6 * 5 / 52)
 
