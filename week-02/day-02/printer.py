@@ -8,4 +8,4 @@ def printer(*args):
 
 print(3)
 print()
-printer("Mimi", "Mami", 5)
+printer("Mimi", "Mami", 5) 
