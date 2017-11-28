@@ -6,4 +6,6 @@ def printer(*args):
     for i in args:
         print(i)
 
+print(3)
+print()
 printer("Mimi", "Mami", 5)
