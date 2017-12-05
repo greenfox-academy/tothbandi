@@ -6,3 +6,15 @@
 # So if the word is "apple" and the number is 5, than it should write 5 lines
 # to the file and each line should be "apple"
 # The function should not raise any error if it could not write the file.
+
+def writes_to_file(file_name, word, number):
+    try:
+        file = open(file_name, "w")
+        file.write((word + "\n") * number)
+        file.close()
+    except:
+        print()
+        
+writes_to_file("my-file3.txt", "Apple, why not ...", 5)
+
+
