@@ -1,0 +1,24 @@
+{
+  "exercises": {
+    "copy_file.py": "",
+    "count_lines.py": "",
+    "divide_by_zero.py": "",
+    "doubled.py": "",
+    "duplicated-chars.txt": "",
+    "encoded-lines.txt": "",
+    "encoded_lines.py": "",
+    "lottery.py": "",
+    "otos.csv": "",
+    "print_each_line.py": "",
+    "reversed-lines.txt": "",
+    "reversed-order.txt": "",
+    "reversed_lines.py": "",
+    "reversed_order.py": "",
+    "write_multiple_lines.py": "",
+    "write_single_line.py": ""
+  },
+  "lang": "python",
+  "repo": "teaching-materials",
+  "workshop-path": "workshop/file-manipulations",
+  "workshop-url": "https://github.com/greenfox-academy/teaching-materials/blob/master/workshop/file-manipulations/python.md"
+}
