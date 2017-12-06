@@ -12,12 +12,15 @@ canvas.pack()
 # create a loop that fills the canvas with rainbow colored squares.
 
 def sq(size, color):
-    pos = randrange(300)
-    sq = canvas.create_rectangle(pos-size//2, pos-size//2, pos+size//2, pos+size//2, fill=color)
+    posx = randrange(300)
+    posy = randrange(300)
+    sq = canvas.create_rectangle(posx-size//2, posy-size//2, posx+size//2, posy+size//2, fill=color)
 
 rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple']
 
-for _ in range(100):
+for _ in range(50):
     sq(randrange(300), rainbow[randrange(7)])
-    # sleep(0.1) - this line doesn't work, only takes 0.1s * 100 and after draws?
+    canvas.update()
+    sleep(0.1) #- this line doesn't work, only takes 0.1s * 100 and after draws?
+
 root.mainloop()
