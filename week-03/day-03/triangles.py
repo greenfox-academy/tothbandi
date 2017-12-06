@@ -15,8 +15,6 @@ h = int(a*sqrt(3)/2)
 def tri(x,y, a, h):
     tri = canvas.create_polygon(x, y, x + a, y, x + a/2, y - h, outline='black', fill='white', width=1)
 
-tri(0, 600, a, h)
-
 for i in range(rows):
     for j in range(rows-i):
         tri(j*a+i*a/2, 600-(i*h), a, h)
