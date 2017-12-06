@@ -3,7 +3,7 @@ from tkinter import *
 root = Tk()
 
 c_width, c_height = 300, 300
-canvas = Canvas(root, width=c_width, height=c_height, bg='white')
+canvas = Canvas(root, width=c_width, height=c_height, bg ='white')
 canvas.pack()
 
 # draw four different size and color rectangles.
