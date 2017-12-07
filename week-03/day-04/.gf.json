@@ -1,0 +1,19 @@
+{
+  "exercises": {
+    "bunny1.py": "",
+    "bunny2.py": "",
+    "counter.py": "",
+    "fibonacci.py": "",
+    "number_adder.py": "",
+    "power.py": "",
+    "refactorio.py": "",
+    "string1.py": "",
+    "string2.py": "",
+    "string3.py": "",
+    "sum_digit.py": ""
+  },
+  "lang": "python",
+  "repo": "teaching-materials",
+  "workshop-path": "workshop/recursion",
+  "workshop-url": "https://github.com/greenfox-academy/teaching-materials/blob/master/workshop/recursion/python.md"
+}
