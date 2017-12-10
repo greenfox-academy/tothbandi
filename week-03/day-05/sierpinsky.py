@@ -22,14 +22,15 @@ def square(x, y, width, height):
 
     w3 = width / 3
     h3 = height / 3
-
-    draw_sq(x + w3,     y + h3,
-            x + 2 * w3, y + 2 * h3)
     
     for i in range(3):
         for j in range(3):
             if not (j == 1 and i == 1):
                 square(x + j * w3, y + i * h3, w3, h3)
+
+    draw_sq(x + w3,     y + h3,
+            x + 2 * w3, y + 2 * h3)
+
 
 square(2, 2, cw - 2, ch - 2)
 
