@@ -1,5 +1,5 @@
 class Plant(object):
-    def __init__(self, color, water_amount = 0):
+    def __init__(self, color, water_amount = 0.0):
         self.color = color
         self.water_amount = water_amount
     
@@ -8,4 +8,3 @@ class Plant(object):
 
     def needs_water(self):
         return self.water_amount < 20
-    
