@@ -12,12 +12,12 @@ class Garden(object):
     def watering(self, amount_of_water):
         print('Watering with {}'.format(amount_of_water))
         thirsties = 0
-        for i in len(self.plants):
+        for i in range(len(self.plants)):
             if self.plants[i].needs_water:
                 thirsties += 1
         amount_of_water /= thirsties
-        for i in len(self.plants):
+        for i in range(len(self.plants)):
             if self.plants[i].needs_water:
                 self.plants[i].watering(amount_of_water)
     
-
+       
