@@ -1,4 +1,4 @@
-class AirCraft(object):
+class Aircraft(object):
     def __init__(self, ac_type, ammo = 0, max_ammo = 8, base_damage = 30):
         self.ac_type = ac_type
         self.ammo = ammo
@@ -7,8 +7,9 @@ class AirCraft(object):
         if self.ac_type == 'F35':
             self.max_ammo = 12
             self.base_damage = 50
-        elif self.ac_type != 'F16' or self.ac_type != 'F35':
-            print('No such an aircraft! :(')            
+        elif ac_type != 'F16' and ac_type != 'F35':
+            print('No such an aircraft! :(')
+        self.ammo = self.max_ammo            
     
     def fight(self):
         damage_deals = self.ammo * self.base_damage
@@ -28,7 +29,7 @@ class AirCraft(object):
         return self.ac_type
 
     def get_status(self):
-        return 'Type {}, Ammo: {}, Base Damage: {}, All Damage: {}'.format(
+        return 'Type {}, Ammo: {}, Base Damage: {}, All Damage: {}\n'.format(
                 self.ac_type, self.ammo, self.base_damage, self.ammo * self.base_damage)
     
 
