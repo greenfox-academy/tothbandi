@@ -33,7 +33,7 @@ for member in people:
     member.introduce()
     member.get_goal()
 
-badass = LagopusClass('BADA55')
+badass = PallidaClass('BADA55')
 badass.add_student(student);
 badass.add_student(john);
 badass.add_mentor(mentor);

@@ -1,6 +1,8 @@
 class PallidaClass(object):
     def __init__(self, class_name, students = [], mentors = []):
         self.class_name = class_name
+        self.students = students
+        self.mentors = mentors
 
     def add_student(self, student):
         self.students.append(student)
