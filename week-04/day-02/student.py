@@ -15,5 +15,5 @@ class Student(Person):
         )) 
 
     def skip_days(self, number_of_days):
-        self.number_of_days += number_of_days
+        self.skipped_days += number_of_days
     
