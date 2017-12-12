@@ -1,7 +1,7 @@
 from person import Person
 
 class Student(Person):
-    def __init__(self, name, age, gender, previous_organization = 'The School of Life', skipped_days = 0):
+    def __init__(self, name = 'Jane Doe', age = 30, gender = 'female', previous_organization = 'The School of Life', skipped_days = 0):
         super().__init__(name, age, gender)
         self.previous_organization = previous_organization
         self.skipped_days = skipped_days
