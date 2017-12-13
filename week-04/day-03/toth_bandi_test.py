@@ -41,7 +41,23 @@ class TestTothBandi(unittest.TestCase):
     def test_anagram_no_case_sensitive(self):
         anagram = MyClass()
         self.assertEqual(anagram.is_anagram('Orrszarvu', 'rovar ruzs'), True)           
-        
+
+    def test_character_counter(self):
+        characters = MyClass()
+        my_string = 'an apple'
+        my_dict = {'a': 2, 'n': 1, ' ': 1, 'p': 2, 'l': 1, 'e': 1}
+        self.assertEqual(characters.string_processor(my_string), my_dict)
+    
+    def test_character_counter_empty_string(self):
+        characters = MyClass()
+        my_string = ''
+        my_dict = {}
+        self.assertEqual(characters.string_processor(my_string), my_dict)        
+
+    def test_character_counter_null(self):
+        characters = MyClass()
+        my_dict = {}
+        self.assertEqual(characters.string_processor(), my_dict)        
 
 
 if __name__ == '__main__':
