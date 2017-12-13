@@ -57,8 +57,19 @@ class TestTothBandi(unittest.TestCase):
     def test_character_counter_null(self):
         characters = MyClass()
         my_dict = {}
-        self.assertEqual(characters.string_processor(), my_dict)        
+        self.assertEqual(characters.string_processor(), my_dict)
 
+    def test_fibonacci(self):
+        fibo = MyClass()
+        self.assertEqual(fibo.fibonacci(6), 8)
+
+    def test_fibonacci(self):
+        fibo = MyClass()
+        self.assertEqual(fibo.fibonacci(0), 0)
+
+    def test_fibonacci(self):
+        fibo = MyClass()
+        self.assertEqual(fibo.fibonacci(1), 1)        
 
 if __name__ == '__main__':
     unittest.main()

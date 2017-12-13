@@ -26,3 +26,9 @@ class MyClass():
         chars1 = self.string_processor(string1, False)
         chars2 = self.string_processor(string2, False)
         return chars1 == chars2
+
+    def fibonacci(self, number):
+        if number < 2:
+            return number
+        else:
+            return self.fibonacci(number - 1) + self.fibonacci(number - 2)
