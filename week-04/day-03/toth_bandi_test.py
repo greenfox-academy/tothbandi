@@ -26,6 +26,23 @@ class TestTothBandi(unittest.TestCase):
         anagram = MyClass()
         self.assertEqual(anagram.is_anagram('orrszarvu', 'rovar ruzs'), True)
 
+    def test_anagram_empty_string(self):
+        anagram = MyClass()
+        self.assertEqual(anagram.is_anagram('', ' '), True)
+
+    def test_anagram_null(self):
+        anagram = MyClass()
+        self.assertEqual(anagram.is_anagram(), True)
+    
+    def test_anagram_with_not_anagrams(self):
+        anagram = MyClass()
+        self.assertEqual(anagram.is_anagram('ok', 'nok'), False)
+
+    def test_anagram_no_case_sensitive(self):
+        anagram = MyClass()
+        self.assertEqual(anagram.is_anagram('Orrszarvu', 'rovar ruzs'), True)           
+        
+
 
 if __name__ == '__main__':
     unittest.main()
