@@ -1,9 +1,12 @@
 from tkinter import *
 import tile
+import maps
 
 root = Tk()
 canvas = Canvas(root, width = 724, height = 724)
 canvas.pack()
+a_map = maps.Maps()
+print(a_map.get_map())
 
 tiles = []
 global images
