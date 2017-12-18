@@ -10,3 +10,9 @@ class Floor(Tile):
     is_permeable = True
     def __init__(self, posx, posy):
         super().__init__(Floor.image, posx, posy, Floor.is_permeable)
+
+class Wall(Tile):
+    image = 'wall.png'
+    is_permeable = False
+    def __init__(self, posx, posy):
+        super().__init__(Floor.image, posx, posy, Floor.is_permeable)
