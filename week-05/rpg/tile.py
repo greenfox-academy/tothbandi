@@ -6,6 +6,7 @@ class Tile(object):
         self.is_permeable = is_permeable
 
 class Floor(Tile):
-    def __init__(self, image, posx, posy):
-        self.is_permeable = True
-        super().__init__(image, posx, posy, self.is_permeable)
+    image = 'floor.png'
+    is_permeable = True
+    def __init__(self, posx, posy):
+        super().__init__(Floor.image, posx, posy, Floor.is_permeable)

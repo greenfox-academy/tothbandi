@@ -5,14 +5,15 @@ root = Tk()
 canvas = Canvas(root, width = 724, height = 724)
 canvas.pack()
 
+tiles = []
+global images
+images = []
 
-floor = []
 for i in range(10):
-    floor.append([])
-
+    tiles.append([])
+    images.append([])
     for j in range(10):
-        floor[i].append(tile.Floor('floor.png', 2 + j * 72, 2 + i * 72))
-        img = PhotoImage(file = floor[i][j].image)
-        canvas.create_image(floor[i][j].posx, floor[i][j].posy, anchor = 'nw', image = img)
-
+        tiles[i].append(tile.Floor(4 + j * 72, 4 + i * 72))
+        images[i].append(PhotoImage(file = tiles[i][j].image))
+        canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
 root.mainloop()
