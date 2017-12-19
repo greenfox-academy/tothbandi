@@ -77,8 +77,10 @@ class View(object):
     def get_canvas(self):
         return self.canvas
     
-    # def 
-    
+    def draw_tile(self, posx, posy, img):
+        img_id = self.canvas.create_image(posx, posy, anchor = 'nw', image = img)
+        self.canvas.scale(img_id, 0, 0, self.get_ratio(), self.get_ratio())
+
     def create_board(self):
         row = self.get_tiles_in_row()
         col = self.get_tiles_in_col()
@@ -100,11 +102,11 @@ class View(object):
                 image_id = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
                 self.canvas.scale(image_id, 0, 0, ratio, ratio)
     
-    def draw_hero(self, hero):
+    def draw_hero(self):
+        hero = character.Hero(0, 0, 11, 11, 11, 11)
         global img
         img = PhotoImage(file = hero.image)
-        img_id = self.canvas.create_image(0,0, anchor = 'nw', image = img)
-        self.canvas.scale(img_id, 0, 0, self.get_ratio(), self.get_ratio())
+        self.draw_tile(hero.posx, hero.posy, img)
 
     def root_mainloop(self):
         self.root.mainloop()

@@ -11,8 +11,7 @@ view.set_canvas_size()
 view.set_canvas()
 view.create_board()
 
-hero = character.Hero(11, 11, 11, 11)
-view.draw_hero(hero)
+view.draw_hero()
 
 view.root_mainloop()
 
