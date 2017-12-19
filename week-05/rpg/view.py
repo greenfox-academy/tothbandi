@@ -45,10 +45,10 @@ class View(object):
         return self.ratio
 
     def set_canvas_width(self, width):
-        self.width = width
+        self.canvas_width = width
     
     def set_canvas_height(self, height):
-        self.height = height
+        self.canvas_height = height
 
     def set_canvas_size(self):
         screen_width = self.root.winfo_screenwidth()
@@ -93,17 +93,5 @@ class View(object):
                     images[i].append(PhotoImage(file = tiles[i][j].image))
                     iid = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
                     self.canvas.scale(iid, 0, 0, ratio, ratio)
-        self.canvas.pack()
-
         self.root.mainloop()
-
-
-board = boards.Boards()
-
-view = View(board)
-
-view.set_canvas_size()
-
-view.set_canvas()
-
-view.draw_board()
+        
