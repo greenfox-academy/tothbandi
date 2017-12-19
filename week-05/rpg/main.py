@@ -1,9 +1,12 @@
 from tkinter import *
-from resizeimage import resizeimage
 import tile
 import maps
+import view
 
-root = Tk()
+view = view.View()
+view.set_canvas_size()
+
+root = view.root
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight() - 168 # because of Windows taskbar
