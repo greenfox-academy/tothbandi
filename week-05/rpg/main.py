@@ -1,6 +1,6 @@
 from tkinter import *
 import tile
-import maps
+import boards
 import view
 
 view = view.View()
@@ -33,8 +33,8 @@ print(str(board_width * ratio) + ' ' + str(board_height *ratio))
 canvas = Canvas(root, width = canvas_width, height = canvas_height)
 print(canvas)
 canvas.pack()
-a_map = maps.Maps()
-area = a_map.get_map()
+board = boards.Boards()
+act_board = board.get_board()
 tiles = []
 global images
 images = []
@@ -43,7 +43,7 @@ for i in range(10):
     tiles.append([])
     images.append([])
     for j in range(10):
-        if area[i][j] == '0':
+        if act_board[i][j] == '0':
             tiles[i].append(tile.Floor(4 + j * 72, 4 + i * 72))
             images[i].append(PhotoImage(file = tiles[i][j].image))
             iid = canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
