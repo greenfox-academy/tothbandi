@@ -13,6 +13,14 @@ class View(object):
         self.ratio = 0.0
         self.images = []
         self.tiles = []
+        self.init_board()
+    
+    def init_board(self):
+        self.set_canvas_size()
+        self.set_canvas()
+        self.create_board()
+        self.init_hero()
+        self.root_mainloop()
     
     def get_tile_width(self):
         atile = tile.Floor(0,0)
@@ -86,7 +94,6 @@ class View(object):
         col = self.get_tiles_in_col()
         act_board = self.board
         tiles = self.tiles
-        # global images
         images = self.images
         ratio = self.get_ratio()
         for i in range(col):
@@ -99,10 +106,9 @@ class View(object):
                 else:
                     tiles[i].append(tile.Wall(4 + j * 72, 4 + i * 72))
                     images[i].append(PhotoImage(file = tiles[i][j].image))
-                image_id = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
-                self.canvas.scale(image_id, 0, 0, ratio, ratio)
+                self.draw_tile(tiles[i][j].posx, tiles[i][j].posy,images[i][j])
     
-    def draw_hero(self):
+    def init_hero(self):
         hero = character.Hero(0, 0, 11, 11, 11, 11)
         global img
         img = PhotoImage(file = hero.image)
