@@ -10,6 +10,8 @@ view = view.View(board)
 view.set_canvas_size()
 
 root = view.root
+canvas = view.set_canvas()
+
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight() - 168 # because of Windows taskbar
@@ -33,9 +35,10 @@ print(ratio)
 
 print(str(board_width * ratio) + ' ' + str(board_height *ratio))
 
-canvas = Canvas(root, width = canvas_width, height = canvas_height)
-print(canvas)
-canvas.pack()
+# canvas = Canvas(root, width = canvas_width, height = canvas_height)
+# canvas.pack()
+
+canvas = view.get_canvas()
 
 tiles = []
 global images

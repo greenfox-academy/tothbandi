@@ -8,6 +8,7 @@ class View(object):
         self.root = Tk()
         self.canvas_width = 0
         self.canvas_height = 0
+        self.canvas = None
     
     def get_tile_width(self):
         atile = tile.Floor(0,0)
@@ -59,4 +60,11 @@ class View(object):
         print('set_canvas_size')
         print(str(board_width) + ' ' + str(board_height))
         print(str(canvas_width) + ' ' + str(canvas_height))
+
+    def set_canvas(self):
+        self.canvas = Canvas(self.root, width = self.canvas_width, height = self.canvas_height)
+        self.canvas.pack()
+    
+    def get_canvas(self):
+        return self.canvas
         
