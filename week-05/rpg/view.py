@@ -19,16 +19,22 @@ class View(object):
     def get_tile_height(self):
         atile = tile.Floor(0,0)
         img = PhotoImage(file = atile.image)
-        return img.height()    
+        return img.height()
+
+    def get_tiles_in_row(self):
+        return len(self.board[0])
+    
+    def get_tiles_in_col(self):
+        return len(self.board)
     
     def get_board_width(self):
         tile_width = self.get_tile_width()
-        tiles_in_row = len(self.board[0])
+        tiles_in_row = self.get_tiles_in_row()
         return tiles_in_row * tile_width
 
     def get_board_height(self):
         tile_height = self.get_tile_height()
-        tiles_in_col = len(self.board)
+        tiles_in_col = self.get_tiles_in_col()
         return tiles_in_col * tile_height
 
     def set_ratio(self, screen_width, screen_height, board_width, board_height):
@@ -74,15 +80,17 @@ class View(object):
         return self.canvas
     
     def draw_board(self):
+        row = self.get_tiles_in_row()
+        col = self.get_tiles_in_col()
         act_board = self.board
         tiles = []
         global images
         images = []
         ratio = self.get_ratio()
-        for i in range(10):
+        for i in range(col):
             tiles.append([])
             images.append([])
-            for j in range(10):
+            for j in range(row):
                 if act_board[i][j] == '0':
                     tiles[i].append(tile.Floor(4 + j * 72, 4 + i * 72))
                     images[i].append(PhotoImage(file = tiles[i][j].image))
