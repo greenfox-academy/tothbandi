@@ -5,7 +5,7 @@ import character
 
 class View(object):
     def __init__(self, board):
-        self.board = board.get_board()
+        self.board = board # .get_board()
         self.root = Tk()
         self.canvas_width = 0
         self.canvas_height = 0
@@ -20,8 +20,34 @@ class View(object):
         self.set_canvas()
         self.create_board()
         self.init_hero()
+        # self.do_game()
         self.root_mainloop()
     
+    def on_key_press(e):
+        if e.keycode == 40: # le
+            # self.draw_tile(hero.posx, hero.posy, img) kell global hero
+            pass
+        elif e.keycode == 39:
+            pass
+
+
+    # def do_game(self):
+
+    #     # and lower if the key that was pressed the down arrow
+    #     # draw the box again in the new position
+    #     box.draw(canvas)
+
+    #     # Tell the canvas that we prepared a function that can deal with the key press events
+    #     canvas.bind("<KeyPress>", on_key_press)
+    #     canvas.pack()
+
+    #     # Select the canvas to be in focused so it actually recieves the key hittings
+    #     canvas.focus_set()
+
+    #     # Draw the box in the initial position
+    #     box.draw(canvas)
+    
+
     def get_tile_width(self):
         atile = tile.Floor(0,0)
         img = PhotoImage(file = atile.image)
@@ -32,20 +58,20 @@ class View(object):
         img = PhotoImage(file = atile.image)
         return img.height()
 
-    def get_tiles_in_row(self):
-        return len(self.board[0])
+    # def get_tiles_in_row(self):    # boardba
+    #     return len(self.board[0])
     
-    def get_tiles_in_col(self):
-        return len(self.board)
+    # def get_tiles_in_col(self):    # boardba
+    #     return len(self.board)
     
     def get_board_width(self):
         tile_width = self.get_tile_width()
-        tiles_in_row = self.get_tiles_in_row()
+        tiles_in_row = self.board.get_row()
         return tiles_in_row * tile_width
 
     def get_board_height(self):
         tile_height = self.get_tile_height()
-        tiles_in_col = self.get_tiles_in_col()
+        tiles_in_col = self.board.get_col()
         return tiles_in_col * tile_height
 
     def set_ratio(self, screen_width, screen_height, board_width, board_height):
@@ -90,12 +116,11 @@ class View(object):
         self.canvas.scale(img_id, 0, 0, self.get_ratio(), self.get_ratio())
 
     def create_board(self):
-        row = self.get_tiles_in_row()
-        col = self.get_tiles_in_col()
-        act_board = self.board
+        row = self.board.get_row()
+        col = self.board.get_col()
+        act_board = self.board.get_board()
         tiles = self.tiles
         images = self.images
-        ratio = self.get_ratio()
         for i in range(col):
             tiles.append([])
             images.append([])
