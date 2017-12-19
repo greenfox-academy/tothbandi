@@ -94,5 +94,9 @@ class View(object):
                     images[i].append(PhotoImage(file = tiles[i][j].image))
                 image_id = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
                 self.canvas.scale(image_id, 0, 0, ratio, ratio)
+    
+    def root_mainloop(self):
         self.root.mainloop()
+    
+
         
