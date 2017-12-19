@@ -45,7 +45,6 @@ class View(object):
         if width_ratio > 1.0:
             width_ratio = 1.0
         self.ratio = width_ratio if width_ratio < height_ratio else height_ratio
-        return self.ratio    
     
     def get_ratio(self):
         return self.ratio
@@ -57,20 +56,16 @@ class View(object):
         self.canvas_height = height
 
     def set_canvas_size(self):
-        screen_width = self.root.winfo_screenwidth()
+        screen_width = self.root.winfo_screenwidth() - 20 # because of fine adjustment
         screen_height = self.root.winfo_screenheight() - 168 # because of Windows taskbar
         board_width = self.get_board_width()
         board_height = self.get_board_height()
         self.set_ratio(screen_width, screen_height, board_width, board_height)
         ratio = self.get_ratio()
-        canvas_width = board_width * ratio + 4
-        canvas_height = board_height * ratio + 4
+        canvas_width = board_width * ratio + 8
+        canvas_height = board_height * ratio + 8
         self.set_canvas_width(canvas_width)
         self.set_canvas_height(canvas_height)
-
-        print('set_canvas_size')
-        print(str(board_width) + ' ' + str(board_height))
-        print(str(canvas_width) + ' ' + str(canvas_height))
 
     def set_canvas(self):
         self.canvas = Canvas(self.root, width = self.canvas_width, height = self.canvas_height)
@@ -94,12 +89,10 @@ class View(object):
                 if act_board[i][j] == '0':
                     tiles[i].append(tile.Floor(4 + j * 72, 4 + i * 72))
                     images[i].append(PhotoImage(file = tiles[i][j].image))
-                    iid = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
-                    self.canvas.scale(iid, 0, 0, ratio, ratio)
                 else:
                     tiles[i].append(tile.Wall(4 + j * 72, 4 + i * 72))
                     images[i].append(PhotoImage(file = tiles[i][j].image))
-                    iid = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
-                    self.canvas.scale(iid, 0, 0, ratio, ratio)
+                image_id = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
+                self.canvas.scale(image_id, 0, 0, ratio, ratio)
         self.root.mainloop()
         
