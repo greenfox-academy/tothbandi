@@ -3,7 +3,10 @@ import tile
 import boards
 import view
 
-view = view.View()
+board = boards.Boards()
+act_board = board.get_board()
+
+view = view.View(board)
 view.set_canvas_size()
 
 root = view.root
@@ -33,8 +36,7 @@ print(str(board_width * ratio) + ' ' + str(board_height *ratio))
 canvas = Canvas(root, width = canvas_width, height = canvas_height)
 print(canvas)
 canvas.pack()
-board = boards.Boards()
-act_board = board.get_board()
+
 tiles = []
 global images
 images = []
