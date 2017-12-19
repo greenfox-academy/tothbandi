@@ -6,7 +6,7 @@ class Character(object):
         self.strike_point = strike_point
 
 class Hero(Character):
-    image = 'hero.png'
+    image = 'hero-down.png'
     def __init__(self, max_health_point, current_health_point, defend_point, strike_point):
         super().__init__(max_health_point, current_health_point, defend_point, strike_point)
 

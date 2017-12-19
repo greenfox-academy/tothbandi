@@ -1,6 +1,7 @@
 from tkinter import *
 import boards
 import tile
+import character
 
 class View(object):
     def __init__(self, board):
@@ -95,6 +96,12 @@ class View(object):
                 image_id = self.canvas.create_image(tiles[i][j].posx, tiles[i][j].posy, anchor = 'nw', image = images[i][j])
                 self.canvas.scale(image_id, 0, 0, ratio, ratio)
     
+    def draw_hero(self, hero):
+        global img
+        img = PhotoImage(file = hero.image)
+        img_id = self.canvas.create_image(0,0, anchor = 'nw', image = img)
+        self.canvas.scale(img_id, 0, 0, self.get_ratio(), self.get_ratio())
+
     def root_mainloop(self):
         self.root.mainloop()
     
