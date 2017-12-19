@@ -11,6 +11,8 @@ class View(object):
         self.canvas_height = 0
         self.canvas = None
         self.ratio = 0.0
+        self.images = []
+        self.tiles = []
     
     def get_tile_width(self):
         atile = tile.Floor(0,0)
@@ -75,13 +77,15 @@ class View(object):
     def get_canvas(self):
         return self.canvas
     
-    def draw_board(self):
+    # def 
+    
+    def create_board(self):
         row = self.get_tiles_in_row()
         col = self.get_tiles_in_col()
         act_board = self.board
-        tiles = []
-        global images
-        images = []
+        tiles = self.tiles
+        # global images
+        images = self.images
         ratio = self.get_ratio()
         for i in range(col):
             tiles.append([])
