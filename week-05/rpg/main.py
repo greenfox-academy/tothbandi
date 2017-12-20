@@ -33,6 +33,7 @@ class Main(object):
     
     def set_skeletons(self):
         max_skeletons = 3
+        boss = randrange(max_skeletons)
         max_x = self.act_board.get_max_col()
         max_y = self.act_board.get_max_row()
         i = 0
@@ -40,9 +41,11 @@ class Main(object):
             posx = randrange(max_x)
             posy = randrange(max_y)
             if self.free_position(posx, posy):
-                i += 1
                 self.skeletons.append(character.Skeleton(posx, posy))
-    
+                if i == boss:
+                    self.skeletons[-1].set_to_boss()
+                i += 1
+
     def init_skeletons(self):
         for skeleton in self.skeletons:
             self.view.init_character(skeleton)

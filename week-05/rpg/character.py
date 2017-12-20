@@ -45,7 +45,18 @@ class Hero(Character):
             super().move_down()
 
 class Skeleton(Character):
+
+    one_is_boss = False
+
     def __init__(self, posx = 0, posy = 0, max_health_point = 0, current_health_point = 0, defend_point = 0, strike_point = 0):
         super().__init__(posx, posy, max_health_point, current_health_point, defend_point, strike_point)
         self.image = 'skeleton.png'    
+        self.is_boss = False
     
+    def set_to_boss(self):
+        if not Skeleton.one_is_boss:
+            Skeleton.one_is_boss = True
+            self.is_boss = True
+            self.image = 'boss.png'
+
+
