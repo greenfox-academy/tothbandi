@@ -16,7 +16,7 @@ class View(object):
         self.character_images = []
         self.offsetX = 2
         self.offsetY = 2
-    
+
     def init_board(self, board):
         self.board = board
         self.set_canvas_size()
@@ -26,7 +26,25 @@ class View(object):
     def init_character(self, character):
         self.character_images.append(PhotoImage(file = character.image))
         self.draw_tile(character, self.character_images[-1])
+        if len(self.character_images) == 1:
+            self.init_hud(character)
+        
+    def init_hud(self, character):
+        self.draw_hud(character)
     
+    def draw_hud(self, character):
+        text = 'Hero (Level {}) HP: {}/{} | DP: {} | SP: {}'
+        hp = character.current_health_point
+        max_hp = character.max_health_point
+        dp = character.defend_point
+        sp = character.strike_point
+        text = text.format(self.get_level(), hp, max_hp, dp, sp)
+        self.canvas.create_text(self.offsetX, self.canvas_height, anchor = 'sw', text = text)
+    
+    def get_level(self):
+        board = boards.Boards()
+        return board.level
+
     def set_canvas_size(self):
         board_width = self.get_board_width()
         board_height = self.get_board_height()
