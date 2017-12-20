@@ -13,15 +13,16 @@ class Boards(object):
         try:
             with open(self.get_file_name()) as file:
                 self.board = file.read().split('\n')
-            # return board
         except FileNotFound:
-            return ''
+            self.board.append('')
     
     def get_board(self):
         return self.board
 
-    def get_row(self): # boardba
+    def get_max_col(self):
         return len(self.board[0])
     
-    def get_col(self): # boardba
-        return len(self.board)    
+    def get_max_row(self):
+        return len(self.board)  
+
+

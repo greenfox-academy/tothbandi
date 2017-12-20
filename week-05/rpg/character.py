@@ -9,7 +9,8 @@ class Character(object):
 
 class Hero(Character):
     image = 'hero-down.png'
-    def __init__(self, posx, posy, max_health_point, current_health_point, defend_point, strike_point):
+    def __init__(self, posx = 0, posy = 0, max_health_point = 0, current_health_point = 0, defend_point = 0, strike_point = 0):
         super().__init__(posx, posy, max_health_point, current_health_point, defend_point, strike_point)
+
 
     
