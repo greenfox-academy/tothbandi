@@ -3,6 +3,7 @@ import tile
 import boards
 import view
 import character
+from random import randint, randrange
 
 class Main(object):
     def __init__(self):
@@ -12,8 +13,11 @@ class Main(object):
         self.hero = character.Hero()
         self.view = view.View()
         self.view.init_board(self.board)
-        self.view.init_hero(self.hero)
+        self.view.init_character(self.hero)
         self.canvas = self.view.get_canvas()
+        self.skeletons = []
+        self.set_skeletons()
+        self.init_skeletons()
     
     def set_board(self, act_board):
         row = act_board.get_max_row()
@@ -26,6 +30,37 @@ class Main(object):
                     self.board[i].append(tile.Floor(i, j))
                 else:
                     self.board[i].append(tile.Wall(i, j))
+    
+    def set_skeletons(self):
+        max_skeletons = 3
+        max_x = self.act_board.get_max_col()
+        max_y = self.act_board.get_max_row()
+        i = 0
+        while i < max_skeletons:
+            posx = randrange(max_x)
+            posy = randrange(max_y)
+            if self.free_position(posx, posy):
+                i += 1
+                self.skeletons.append(character.Skeleton(posx, posy))
+    
+    def init_skeletons(self):
+        for skeleton in self.skeletons:
+            self.view.init_character(skeleton)
+
+    def free_position(self, posx, posy):
+        return self.not_hero(posx, posy) and self.not_wall(posx, posy) and self.not_skeleton(posx, posy)
+
+    def not_hero(self, posx, posy):
+        return not (posx == self.hero.posx and posy == self.hero.posy)
+
+    def not_wall(self, posx, posy):
+        return self.board[posx][posy].is_permeable
+    
+    def not_skeleton(self, posx, posy):
+        for i in range(len(self.skeletons)):
+            if posx == self.skeletons[i].posx and posy == self.skeletons[i].posy:
+                return False
+        return True
 
     def on_key_press(self, e):
         self.view.redraw_tile(self.board[self.hero.posx][self.hero.posy])

@@ -23,10 +23,10 @@ class View(object):
         self.set_canvas()
         self.draw_board()
 
-    def init_hero(self, hero):
-        self.character_images.append(PhotoImage(file = hero.image))
-        self.draw_tile(hero, self.character_images[0])
-
+    def init_character(self, character):
+        self.character_images.append(PhotoImage(file = character.image))
+        self.draw_tile(character, self.character_images[-1])
+    
     def set_canvas_size(self):
         board_width = self.get_board_width()
         board_height = self.get_board_height()
