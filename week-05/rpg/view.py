@@ -70,44 +70,19 @@ class View(object):
         posx = self.offsetX + tile.posx * self.tile_width
         posy = self.offsetY + tile.posy * self.tile_height
         self.canvas.create_image(posx, posy, anchor = 'nw', image = image)
+    
+    def redraw_tile(self, tile):
+        self.draw_tile(tile, self.board_images[tile.posx][tile.posy])
+
+    def draw_hero(self, hero):
+        self.character_images[0] = PhotoImage(file = hero.image)
+        self.draw_tile(hero, self.character_images[0])
  
     def get_canvas(self):
         return self.canvas
 
     def root_mainloop(self):
         self.root.mainloop()
-
-    #  def on_key_press(e):
-    #     if e.keycode == 40: # le
-    #         # self.draw_tile(hero.posx, hero.posy, img) kell global hero
-    #         pass
-    #     elif e.keycode == 39:
-    #         pass
-
-
-    # def do_game(self):
-
-    #     # and lower if the key that was pressed the down arrow
-    #     # draw the box again in the new position
-    #     box.draw(canvas)
-
-    #     # Tell the canvas that we prepared a function that can deal with the key press events
-    #     canvas.bind("<KeyPress>", on_key_press)
-    #     canvas.pack()
-
-    #     # Select the canvas to be in focused so it actually recieves the key hittings
-    #     canvas.focus_set()
-
-    #     # Draw the box in the initial position
-    #     box.draw(canvas)
-    
-
-
-    # def get_tiles_in_row(self):    # boardba
-    #     return len(self.board[0])
-    
-    # def get_tiles_in_col(self):    # boardba
-    #     return len(self.board)
 
 
     

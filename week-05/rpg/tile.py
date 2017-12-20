@@ -4,7 +4,7 @@ class Tile(object):
         self.posx = posx
         self.posy = posy
         self.is_permeable = is_permeable
-
+    
 class Floor(Tile):
     image = 'floor.png'
     is_permeable = True
