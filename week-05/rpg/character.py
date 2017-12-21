@@ -36,6 +36,7 @@ class Skeleton(Character):
         self.image = 'skeleton.png'    
         self.is_boss = False
         self.has_key = False
+        self.level = 0
     
     def set_to_boss(self):
         if not Skeleton.one_is_boss:

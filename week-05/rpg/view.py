@@ -35,17 +35,15 @@ class View(object):
         self.hud.pack()
         self.hud.config(state = 'disabled')
         self.draw_hud(charac)
-        # hud.cin
-        # t.insert('end', text)
-        # t.config(state = 'disabled')
        
     def draw_hud(self, charac):
         text = self.hud.get('1.0', 'end-1c')
         if type(charac) == character.Hero:
             text = 'Hero:     (Level {}) HP: {}/{} | DP: {} | SP: {}'
+            level = self.get_level()
         else:
             text += '\nSkeleton: (Level {}) HP: {}/{} | DP: {} | SP: {}'
-        level = self.get_level()
+            level = charac.level
         hp = charac.current_health_point
         max_hp = charac.max_health_point
         dp = charac.defend_point

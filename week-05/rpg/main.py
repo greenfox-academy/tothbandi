@@ -14,11 +14,9 @@ class Main(object):
         self.view = view.View()
         self.view.init_board(self.board)
         self.init_character(self.hero)
-        # self.view.init_character(self.hero)
         self.canvas = self.view.get_canvas()
         self.skeletons = []
         self.set_skeletons()
-        # self.init_skeletons()
     
     def init_character(self, charac):
         if type(charac) == character.Hero:
@@ -37,6 +35,7 @@ class Main(object):
                 hp += self.d6()
                 dp += int(self.d6() / 2)
                 sp += level
+            charac.level = level
         charac.max_health_point = mhp
         charac.current_health_point = hp
         charac.defend_point = dp
