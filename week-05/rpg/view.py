@@ -16,6 +16,7 @@ class View(object):
         self.character_images = []
         self.offsetX = 4
         self.offsetY = 4
+        self.hud = None
 
     def init_board(self, board):
         self.board = board
@@ -23,30 +24,41 @@ class View(object):
         self.set_canvas()
         self.draw_board()
 
-    def init_character(self, character):
-        self.character_images.append(PhotoImage(file = character.image))
-        self.draw_tile(character, self.character_images[-1])
+    def init_character(self, charac):
+        self.character_images.append(PhotoImage(file = charac.image))
+        self.draw_tile(charac, self.character_images[-1])
         if len(self.character_images) == 1:
-            self.init_hud(character)
-        
-    def init_hud(self, character):
-        self.draw_hud(character)
+            self.init_hud(charac)
     
-    def draw_hud(self, character):
-        text = 'Hero (Level {}) HP: {}/{} | DP: {} | SP: {}'
+    def init_hud(self, charac):
+        self.hud = Text(self.root, height = 2, width = 60)
+        self.hud.pack()
+        self.hud.config(state = 'disabled')
+        self.draw_hud(charac)
+        # hud.cin
+        # t.insert('end', text)
+        # t.config(state = 'disabled')
+       
+    def draw_hud(self, charac):
+        text = self.hud.get('1.0', 'end-1c')
+        if type(charac) == character.Hero:
+            text = 'Hero:     (Level {}) HP: {}/{} | DP: {} | SP: {}'
+        else:
+            text += '\nSkeleton: (Level {}) HP: {}/{} | DP: {} | SP: {}'
         level = self.get_level()
-        hp = character.current_health_point
-        max_hp = character.max_health_point
-        dp = character.defend_point
-        sp = character.strike_point
+        hp = charac.current_health_point
+        max_hp = charac.max_health_point
+        dp = charac.defend_point
+        sp = charac.strike_point
         text = text.format(level, hp, max_hp, dp, sp)
-        t = Text(self.root, height = 2, width = 50)
-        # t = Message(self.root, width = 540, text = text)
-        t.pack()
-        t.insert('end', text)
-        t.config(state = 'disabled')
-        # self.canvas.create_text(self.offsetX, self.canvas_height, anchor = 'sw', text = text, width = 540, justify = 'center')
+        self.hud.config(state = 'normal')
+        self.hud.delete('1.0', 'end')
+        self.hud.insert('end', text)
+        self.hud.config(state = 'disabled')
     
+    def get_text(self, charac):
+        pass
+
     def get_level(self):
         board = boards.Boards()
         return board.level

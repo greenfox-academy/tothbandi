@@ -82,7 +82,6 @@ class Main(object):
         self.set_key_keeper()
         for skeleton in self.skeletons:
             print('bos: {}, key: {}'.format(skeleton.is_boss, skeleton.has_key))
-
     
     def set_boss(self):
         boss = randrange(len(self.skeletons))
@@ -115,6 +114,7 @@ class Main(object):
 
     def on_key_press(self, e):
         self.view.redraw_tile(self.board[self.hero.posx][self.hero.posy])
+        self.view.draw_hud(self.hero)
         direction = ''
         if e.keycode == 37:
             direction = 'left'
@@ -125,7 +125,13 @@ class Main(object):
         elif e.keycode == 40:
             direction = 'down'
         self.hero.move(direction, self.can_go(self.hero, direction))
-        self.view.draw_hero(self.hero)    
+        self.view.draw_hero(self.hero)
+        self.on_skeleton(self.hero)
+
+    def on_skeleton(self, charac):
+        for skeleton in self.skeletons:
+            if charac.posx == skeleton.posx and charac.posy == skeleton.posy:
+                self.view.draw_hud(skeleton)
     
     def character_move(self, charac, direction):
         charac.move(direction, self.can_go(charac, direction))
