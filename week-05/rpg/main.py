@@ -14,37 +14,39 @@ class Main(object):
         self.view = view.View()
         self.view.init_board(self.board)
         self.init_character(self.hero)
-        self.view.init_character(self.hero)
+        # self.view.init_character(self.hero)
         self.canvas = self.view.get_canvas()
         self.skeletons = []
         self.set_skeletons()
-        self.init_skeletons()
+        # self.init_skeletons()
     
     def init_character(self, charac):
         if type(charac) == character.Hero:
-            charac.max_health_point = 20 + 3 * 6
-            charac.current_health_point = 20 + 3 * self.d6()
-            charac.defend_point = 2 * self.d6()
-            charac.strike_point = 5 + self.d6()
+            mhp = 20 + 3 * 6
+            hp = 20 + 3 * self.d6()
+            dp = 2 * self.d6()
+            sp = 5 + self.d6()
         else:
             level = self.randlevel()
             mhp = 2 * level * 6
             hp = 2 * level * self.d6()
-            dp = level / 2 * self.d6()
+            dp = int(level / 2 * self.d6())
             sp = level * self.d6()
             if charac.is_boss:
                 mhp += 6
                 hp += self.d6()
-                dp += self.d6() / 2
+                dp += int(self.d6() / 2)
                 sp += level
-            charac.current_health_point = hp
-            charac.defend_point = dp
-            charac.strike_point = strike_point
+        charac.max_health_point = mhp
+        charac.current_health_point = hp
+        charac.defend_point = dp
+        charac.strike_point = sp
+        self.view.init_character(charac)
 
     def d6(self):
         return randint(1, 6)
 
-    def randlevel():
+    def randlevel(self):
         level = self.act_board.level
         rand = randrange(100)
         if rand < 50:
@@ -81,7 +83,7 @@ class Main(object):
         self.set_boss()
         self.set_key_keeper()
         for skeleton in self.skeletons:
-            print('bos: {}, key: {}'.format(skeleton.is_boss, skeleton.has_key))
+            self.init_character(skeleton)
     
     def set_boss(self):
         boss = randrange(len(self.skeletons))

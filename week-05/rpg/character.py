@@ -23,7 +23,6 @@ class Hero(Character):
         self.image = 'hero-down.png'
     
     def move(self, direction, can_go):
-        print(direction)
         self.image = 'hero-{}.png'.format(direction)
         if can_go:
             super().move(direction)    
@@ -48,4 +47,6 @@ class Skeleton(Character):
         if not self.is_boss:
             self.has_key = True
 
-
+    def move(self, direction, can_go):
+        if can_go:
+            super().move(direction)
