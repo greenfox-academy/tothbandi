@@ -52,11 +52,16 @@ class Skeleton(Character):
         super().__init__(posx, posy, max_health_point, current_health_point, defend_point, strike_point)
         self.image = 'skeleton.png'    
         self.is_boss = False
+        self.has_key = False
     
     def set_to_boss(self):
         if not Skeleton.one_is_boss:
             Skeleton.one_is_boss = True
             self.is_boss = True
             self.image = 'boss.png'
+    
+    def set_key(self):
+        if not self.is_boss:
+            self.has_key = True
 
 

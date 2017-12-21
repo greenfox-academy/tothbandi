@@ -69,7 +69,6 @@ class Main(object):
     
     def set_skeletons(self):
         max_skeletons = randint(3, 6)
-        boss = randrange(max_skeletons)
         max_x = self.act_board.get_max_col()
         max_y = self.act_board.get_max_row()
         i = 0
@@ -78,9 +77,22 @@ class Main(object):
             posy = randrange(max_y)
             if self.free_position(posx, posy):
                 self.skeletons.append(character.Skeleton(posx, posy))
-                if i == boss:
-                    self.skeletons[-1].set_to_boss()
                 i += 1
+        self.set_boss()
+        self.set_key_keeper()
+        for skeleton in self.skeletons:
+            print('bos: {}, key: {}'.format(skeleton.is_boss, skeleton.has_key))
+
+    
+    def set_boss(self):
+        boss = randrange(len(self.skeletons))
+        self.skeletons[boss].set_to_boss()
+    
+    def set_key_keeper(self):
+        key = randrange(len(self.skeletons))
+        while not self.skeletons[key].has_key:
+            key = randrange(len(self.skeletons))
+            self.skeletons[key].set_key()
 
     def init_skeletons(self):
         for skeleton in self.skeletons:
