@@ -140,7 +140,6 @@ class Main(object):
             self.view.redraw_tile(self.board[self.skeletons[i].posx][self.skeletons[i].posy])
             self.move_skeleton(self.skeletons[i], i)
 
-
     def move_skeleton(self, skeleton, index):
         sx = skeleton.posx
         sy = skeleton.posy
@@ -166,8 +165,20 @@ class Main(object):
             next_dist.append(1000)
         i = next_dist.index(min(next_dist))
         dir = ['left', 'up', 'right', 'down']
-        skeleton.move(dir[i], True)
-        self.view.draw_skeleton(skeleton, index)
+        if next_dist[i] < 1000 and self.not_on_another_skeleton(index):
+            skeleton.move(dir[i], True)
+            self.view.draw_skeleton(skeleton, index)
+
+    def not_on_another_skeleton(self, index):
+        sx = self.skeletons[index].posx
+        sy = self.skeletons[index].posy
+        for i in range(len(self.skeletons)):
+            ax = self.skeletons[i].posx
+            ay = self.skeletons[i].posy
+            if not i == index:
+                if sx == ax and sy == ay:
+                    return False
+        return True
 
     def on_skeleton(self, charac):
         on_skeleton = None
