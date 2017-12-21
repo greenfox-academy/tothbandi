@@ -68,7 +68,9 @@ class Main(object):
                     self.board[i].append(tile.Wall(i, j))
     
     def set_skeletons(self):
-        max_skeletons = 3
+        max_skeletons = 0
+        while max_skeletons < 3:
+            max_skeletons = self.d6()
         boss = randrange(max_skeletons)
         max_x = self.act_board.get_max_col()
         max_y = self.act_board.get_max_row()
