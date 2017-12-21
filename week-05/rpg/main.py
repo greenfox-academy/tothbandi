@@ -115,37 +115,30 @@ class Main(object):
 
     def on_key_press(self, e):
         self.view.redraw_tile(self.board[self.hero.posx][self.hero.posy])
-        if e.keycode == 37: # bal
-            self.hero_left()
-        elif e.keycode == 38: # fel
-            self.hero_up()
-        elif e.keycode == 39: # jobb
-            self.hero_right()
-        elif e.keycode == 40: # le
-            self.hero_down()
-        self.view.draw_hero(self.hero)
+        direction = ''
+        if e.keycode == 37:
+            direction = 'left'
+        elif e.keycode == 38:
+            direction = 'up'
+        elif e.keycode == 39:
+            direction = 'right'
+        elif e.keycode == 40:
+            direction = 'down'
+        self.hero.move(direction, self.can_go(self.hero, direction))
+        self.view.draw_hero(self.hero)    
     
-    def hero_left(self):
-        self.hero.move_left(self.can_go(self.hero, 'left'))
+    def character_move(self, charac, direction):
+        charac.move(direction, self.can_go(charac, direction))
 
-    def hero_up(self):
-        self.hero.move_up(self.can_go(self.hero, 'up'))
-
-    def hero_right(self):
-        self.hero.move_right(self.can_go(self.hero, 'right'))
-
-    def hero_down(self):
-        self.hero.move_down(self.can_go(self.hero, 'down'))
-
-    def can_go(self, character, direction):
-        if direction == 'left' and character.posx - 1 >= 0:
-            return self.board[character.posx - 1][character.posy].is_permeable
-        elif direction == 'up' and character.posy - 1 >= 0:
-            return self.board[character.posx][character.posy - 1].is_permeable
-        elif direction == 'right' and character.posx + 1 < len(self.board[0]):
-            return self.board[character.posx + 1][character.posy].is_permeable            
-        elif direction == 'down' and character.posy + 1 < len(self.board):
-            return self.board[character.posx][character.posy + 1].is_permeable
+    def can_go(self, charac, direction):
+        if direction == 'left' and charac.posx - 1 >= 0:
+            return self.board[charac.posx - 1][charac.posy].is_permeable
+        elif direction == 'up' and charac.posy - 1 >= 0:
+            return self.board[charac.posx][charac.posy - 1].is_permeable
+        elif direction == 'right' and charac.posx + 1 < len(self.board[0]):
+            return self.board[charac.posx + 1][charac.posy].is_permeable            
+        elif direction == 'down' and charac.posy + 1 < len(self.board):
+            return self.board[charac.posx][charac.posy + 1].is_permeable
 
 main = Main()
 
