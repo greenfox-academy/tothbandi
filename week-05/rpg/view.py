@@ -113,6 +113,9 @@ class View(object):
     def draw_hero(self, hero):
         self.character_images[0] = PhotoImage(file = hero.image)
         self.draw_tile(hero, self.character_images[0])
+    
+    def draw_skeleton(self, skeleton, index):
+        self.draw_tile(skeleton, self.character_images[index + 1])
  
     def get_canvas(self):
         return self.canvas

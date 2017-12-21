@@ -4,6 +4,7 @@ import boards
 import view
 import character
 from random import randint, randrange
+from math import pow, sqrt
 
 class Main(object):
     def __init__(self):
@@ -17,6 +18,7 @@ class Main(object):
         self.canvas = self.view.get_canvas()
         self.skeletons = []
         self.set_skeletons()
+        self.delay = 1
     
     def init_character(self, charac):
         if type(charac) == character.Hero:
@@ -128,12 +130,54 @@ class Main(object):
         self.hero.move(direction, self.can_go(self.hero, direction))
         self.view.draw_hero(self.hero)
         self.on_skeleton(self.hero)
+        if self.delay == 2:
+            self.move_skeletons()
+            self.delay = 0
+        self.delay += 1
+
+    def move_skeletons(self):
+        for i in range(len(self.skeletons)):
+            self.view.redraw_tile(self.board[self.skeletons[i].posx][self.skeletons[i].posy])
+            self.move_skeleton(self.skeletons[i], i)
+
+
+    def move_skeleton(self, skeleton, index):
+        sx = skeleton.posx
+        sy = skeleton.posy
+        hx = self.hero.posx
+        hy = self.hero.posy
+        dist = sqrt(pow(sx - hx, 2) + pow(sy - hy, 2))
+        next_dist = []
+        if self.can_go(skeleton, 'left'):
+            next_dist.append(sqrt(pow(sx - 1 - hx, 2) + pow(sy - hy, 2)))
+        else:
+            next_dist.append(1000)
+        if self.can_go(skeleton, 'up'):
+            next_dist.append(sqrt(pow(sx - hx, 2) + pow(sy - 1 - hy, 2)))
+        else:
+            next_dist.append(1000)
+        if self.can_go(skeleton, 'right'):
+            next_dist.append(sqrt(pow(sx + 1 - hx, 2) + pow(sy - hy, 2)))
+        else:
+            next_dist.append(1000)
+        if self.can_go(skeleton, 'down'):
+            next_dist.append(sqrt(pow(sx - hx, 2) + pow(sy + 1 - hy, 2)))
+        else:
+            next_dist.append(1000)
+        i = next_dist.index(min(next_dist))
+        dir = ['left', 'up', 'right', 'down']
+        skeleton.move(dir[i], True)
+        self.view.draw_skeleton(skeleton, index)
 
     def on_skeleton(self, charac):
+        on_skeleton = None
         for skeleton in self.skeletons:
             if charac.posx == skeleton.posx and charac.posy == skeleton.posy:
-                self.view.draw_hud(skeleton)
-    
+                on_skeleton = skeleton
+        if not on_skeleton == None:
+            self.view.draw_hud(on_skeleton)
+            self.skeletons.remove(on_skeleton)
+                
     def character_move(self, charac, direction):
         charac.move(direction, self.can_go(charac, direction))
 
