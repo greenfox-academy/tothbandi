@@ -14,8 +14,8 @@ class View(object):
         self.canvas = None
         self.board_images = []
         self.character_images = []
-        self.offsetX = 2
-        self.offsetY = 2
+        self.offsetX = 4
+        self.offsetY = 4
 
     def init_board(self, board):
         self.board = board
@@ -34,12 +34,18 @@ class View(object):
     
     def draw_hud(self, character):
         text = 'Hero (Level {}) HP: {}/{} | DP: {} | SP: {}'
+        level = self.get_level()
         hp = character.current_health_point
         max_hp = character.max_health_point
         dp = character.defend_point
         sp = character.strike_point
-        text = text.format(self.get_level(), hp, max_hp, dp, sp)
-        self.canvas.create_text(self.offsetX, self.canvas_height, anchor = 'sw', text = text)
+        text = text.format(level, hp, max_hp, dp, sp)
+        t = Text(self.root, height = 2, width = 50)
+        # t = Message(self.root, width = 540, text = text)
+        t.pack()
+        t.insert('end', text)
+        t.config(state = 'disabled')
+        # self.canvas.create_text(self.offsetX, self.canvas_height, anchor = 'sw', text = text, width = 540, justify = 'center')
     
     def get_level(self):
         board = boards.Boards()
@@ -48,8 +54,8 @@ class View(object):
     def set_canvas_size(self):
         board_width = self.get_board_width()
         board_height = self.get_board_height()
-        self.canvas_width = board_width + self.offsetX * 2
-        self.canvas_height = board_height + self.offsetY * 2
+        self.canvas_width = board_width + self.offsetX
+        self.canvas_height = board_height + self.offsetY
     
     def get_board_width(self):
         self.set_tile_width()
@@ -72,6 +78,8 @@ class View(object):
         self.tile_height = img.height()
 
     def set_canvas(self):
+        self.root.title('Wanderer Game Exercise - Presented by Green Fox Academy')
+        # self.root.image(file = 'hero-down.png')
         self.canvas = Canvas(self.root, width = self.canvas_width, height = self.canvas_height)
         self.canvas.pack()
 
