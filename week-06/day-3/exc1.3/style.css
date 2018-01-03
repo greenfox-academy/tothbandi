@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.item {
+    height: 200px;
+}
+
+.green {
+    background: green;
+    flex-grow: 1;
+}
+
+.yellow {
+    background: yellow;
+    flex-grow: 2;
+}
+
+.purple {
+    background: purple;
+    flex-grow: 1;
+}

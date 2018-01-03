@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 10px;
+}
+
+.item {
+    height: 200px;
+    float: right;
+}
+
+.green {
+    background: green;
+    width: 25%;
+}
+
+.yellow {
+    background: yellow;
+    width: 50%
+}
+
+.purple {
+    background: purple;
+    width: 25%;
+}
