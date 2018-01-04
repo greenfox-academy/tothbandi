@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: royalblue;
+}
+
+table {
+    margin: 5% auto;
+    width: 70%;
+    min-width: 800px;
+    background-color: grey;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+}
+
+th {
+    background-color: black; 
+    color: lightgrey;
+    font-size: 36px;
+    border-bottom: 4px solid grey;
+}
+
+.datarow:nth-child(2n) > td {
+    background-color: lightblue;
+}
+
+.datarow:nth-child(2n + 1) > td {
+    background-color: lightgrey;
+}
+
+th, td {
+    padding: 25px;
+    height: 80px;
+    font-weight: normal;
+    text-align: left;
+}
+
+td {
+    font-size: 32px;
+    color: rgb(64,64,64);
+}
+
+.datarow:last-child > td:first-child {
+    border-radius: 0 0 0 10px;
+}
+
+.datarow:last-child > td:last-child {
+    border-radius: 0 0 10px 0;
+}
+
+th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 10px 0 0;
+}
