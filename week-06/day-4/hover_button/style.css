@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(57, 57, 57);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+p, div {
+    position: relative;
+}
+
+p {
+    width: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.0);
+    color: black;
+    z-index: 1;
+    animation: phout 1s ease;
+    animation-fill-mode: forwards;
+}
+
+.back {
+    background-color: white;
+    transform: rotate(45deg);
+    right: 150px;
+    z-index: 0;
+}
+
+.border {
+    background-color: rgba(0,0,0,0.0);
+    border: 3px solid red;
+    left: 150px;
+    z-index: 2;
+    animation: hout 1s ease;
+    animation-fill-mode: forwards;
+}
+
+.border:hover {
+    animation: hovered 1s ease;
+    animation-fill-mode: forwards;
+}
+
+.border:hover ~ p {
+    animation: phov 1s ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hovered {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes phov {
+    0% {
+        color: black;
+    }
+    100% {
+        color: red;
+    }
+}
+
+@keyframes hout {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes phout {
+    0% {
+        color: red;
+    }
+    100% {
+        color: black;
+    }
+}
