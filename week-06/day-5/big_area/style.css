@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.item {
+    height: 32vh;
+    background-color: purple;
+}
+
+.green {
+    padding: 10% 15%;
+    background-color: green;
+    grid-column: 2/4;
+    grid-row: 1/3;
+    display: flex;
+}
+
+p {
+    width: 100%;
+    background-color: yellow;
+}
+
