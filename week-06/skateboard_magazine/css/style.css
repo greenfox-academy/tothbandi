@@ -108,6 +108,7 @@ main aside section h3{
 }
 
 main aside section h4{
+    width: 70%;
     font-size: 3.2rem;
     font-family: 'Patua One', cursive;
     font-weight: lighter;
