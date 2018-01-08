@@ -4,18 +4,13 @@
     padding: 0;
 }
 
-body{
-    width: 100vw;
-    height: 110vh;
-}
-
 button{
     border: none;
 }
 
 header{
     width: 100%;
-    height: 11%;
+    height: 4.9rem;
     display:flex;
 }
 
@@ -23,7 +18,7 @@ h1{
     text-indent: -10000px;
     flex-grow: 1;
     background: url(../assets/header_logo.png) no-repeat;
-    background-size: 75%; 
+    background-size: 80%; 
     background-position: center;
     border-right: 2px solid #f5f5f5;
 }
@@ -44,37 +39,35 @@ header ul{
 
 header li{
     list-style-type: none;
-    margin: 0 1rem;
+    margin: 0 0.9rem;
 }
 
 header li a{
-    font: 1.1rem 'Karla', sans-serif;
+    font: 1rem 'Karla', sans-serif;
     font-weight: bolder;
     text-decoration: none;
     color: #a5a5a5;
 }
 
-.btn-img-right{
+.btn {
     display:flex;
     justify-content: center;
     align-items: center;
+    font: 1.1rem 'Karla', sans-serif;
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
 }
 
-.btn-img-right img{
+.btn-img {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+.img-right {
     margin-left: 1rem;
 }
 
-.btn-img-left{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-img-left img{
-    width: 1.5rem;
-    height: 1.5rem;
+.img-left {
     margin-right: 1rem;
 }
 
@@ -83,25 +76,18 @@ header li a{
     background-color: #f5f5f5;
 }
 
-.basket{
-    font: 1.1rem 'Karla', sans-serif;
-    font-weight: bolder;
-}
-
 main {
     width: 100%;
-    height: 89%;
     display:flex;
 }
 
 main > img{
-    flex-grow: 7;
-    width: 70%;
-    height: 100%;
+    width: 67%;
+    height: 67%;
 }
 
-main aside{
-    flex-grow: 3;
+main aside {
+    width: 33%;
     display: flex;
     flex-direction: column;
 }
@@ -111,51 +97,42 @@ main aside section{
     padding: 15%;
     background-color: #1f1f1f;
     color: #a5a5a5;
-    display: flex;
-    flex-direction: column;
 }
 
 main aside section h3{
-    height: 8%;
-    font: 1.2rem 'Karla', sans-serif;
+    font: 1rem 'Karla', sans-serif;
     letter-spacing: 1rem;
     text-transform: uppercase;
     font-weight: bolder;
-    margin-bottom: 1.0rem;
+    margin-bottom: 0.6rem;
 }
 
 main aside section h4{
-    display:inline;
-    width: 70%;
     font-size: 3.2rem;
     font-family: 'Patua One', cursive;
     font-weight: lighter;
     color: white;
-    padding-bottom: 1rem;
+    padding-bottom: 1.4rem;
     border-bottom: 4px solid white;
 }
 
 .lorem{
-    height: 42%;
-    margin-top: 1.2rem;
-    font: 1.0rem 'Karla', sans-serif;
-    line-height: 2.0rem;
-    margin-bottom: 1.2rem;
+    margin-top: 1.4rem;
+    font: 0.9rem 'Karla', sans-serif;
+    line-height: 1.8rem;
+    margin-bottom: 1.6rem;
 }
 
 .read-more{
-    height: 8%;
-    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
     justify-content: flex-start;
     background-color: #1f1f1f;
-    font: 1.2rem 'Karla', sans-serif;
-    font-weight: bolder;
     color: #dfdfdf;
     text-transform: capitalize;
 }
 
 main aside footer{
-    height:11%;
+    height: 11%;
     display: flex;
     align-items: center;
 }
@@ -171,8 +148,6 @@ main aside footer nav{
 .prev, .next{
     background-color: white;
     flex-grow: 1;
-    font: 1.2rem 'Karla', sans-serif;
-    font-weight: bolder;
     color: #dfdfdf;
     height: 100%;
     text-transform: capitalize;
