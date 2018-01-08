@@ -7,16 +7,19 @@ class Skeleton(Character):
     one_is_boss = False
 
     def __init__(self, posx, posy):
-        self.image = 'accessories/skeleton.png'    
+        super().__init__(
+            'accessories/skeleton.png',
+            posx,
+            posy,
+            self.set_max_health_point(),
+            self.set_current_health_point(),
+            self.set_defend_point(),
+            self.set_strike_point()
+            )
         self.is_boss = False
         self.has_key = False
         self.rand = Randomize()
         self.level = self.rand.randlevel(Boards().level)
-        self.max_health_point = self.set_max_health_point()
-        self.current_health_point = self.set_current_health_point()
-        self.defend_point = self.set_defend_point()
-        self.strike_point = self.set_strike_point()        
-        super().__init__(self.image, posx, posy, self.max_health_point, self.current_health_point, self.defend_point, self.strike_point)
     
     def set_to_boss(self):
         if not Skeleton.one_is_boss:
