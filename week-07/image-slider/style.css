@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+  border-width: 0;
   margin: 0;
   padding: 0;
 }
@@ -15,20 +16,38 @@
   justify-content: center;
 }
 
-main{
+.slider{
   display: flex;
   align-items: stretch;
   justify-content: center;
+  padding-bottom: 1%;
+}
+
+footer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn{
+  width: 2.5%;
+  background: url("assets/arrow.svg") no-repeat center lightgray;
+}
+
+.right{
+  transform: scaleX(-1);
 }
 
 .main-img {
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 100%;
 }
 
+
 .thumbnail {
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
+  margin: 1%;
   display: inline-block;
   background-color: cadetblue;
 }
