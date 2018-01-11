@@ -9,27 +9,25 @@
 </head>
 <body>
   <div id="main-window">
-    <main class="slider">
-      <button class="btn left"><!-- <img class="btn-img img-left" src="assets/arrow.svg"> --></button>
-      <img src="images/sample.jpg" alt="image window" class="main-img">
-      <button class="btn right"><!-- <img class="btn-img img-right" src="assets/arrow.svg"> --></button>
+    <main class="slider photo-viewer">
+      <button class="btn left"></button>
+      <div class="main-img choosen-photo">
+        <div class="description">
+          <h1 class="title">Title</h1>
+          <p class="story">lorem ipsum ...</p>
+        </div>
+      </div>
+      <!-- <img src="images/sample.jpg" alt="image window" class="main-img chosen-photo"> -->
+      <button class="btn right"></button>
     </main>
-    <footer>
-      <div class="thumbnail">
-        <img src="#" alt="">
-      </div>
-      <div class="thumbnail">
-        <img src="#" alt="">
-      </div>
-      <div class="thumbnail">
-          <img src="#" alt="">
-      </div>
-      <div class="thumbnail">
-        <img src="#" alt="">
-      </div>
-      <div class="thumbnail">
-        <img src="#" alt="">
-      </div>      
+    <footer class="thumbnails">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
     </footer>
   </div>
   <script src="image-slider.js"></script>

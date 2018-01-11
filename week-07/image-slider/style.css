@@ -30,7 +30,7 @@ footer{
 }
 
 .btn{
-  width: 2.5%;
+  width: 40px;
   background: url("assets/arrow.svg") no-repeat center lightgray;
 }
 
@@ -38,13 +38,29 @@ footer{
   transform: scaleX(-1);
 }
 
-.main-img {
-  width: 60%;
-  height: 100%;
+.choosen-photo {
+  background-image: url('images/sample.jpg');
+  background-size: 800px;
+  width: 800px;
+  height: 450px;
+  display: flex;
+  align-items: flex-end;
 }
 
+.description{
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 25%;
+  padding: 10px;
+}
 
-.thumbnail {
+ul{
+  display: inherit;
+}
+
+li {
+  display: inline-block;
   width: 75px;
   height: 75px;
   margin: 1%;
