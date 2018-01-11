@@ -14,7 +14,7 @@ class Hero(Character):
             self.set_strike_point()
             )
         self.direction = {37: 'left', 38: 'up', 39: 'right', 40: 'down'}
-        self.rand = Randomize()
+        self.rand = Randomize() # NO INSTANTIATION --- USE ON FLY
     
     def move(self, direction, can_go):
         self.image = 'accessories/hero-{}.png'.format(direction)
