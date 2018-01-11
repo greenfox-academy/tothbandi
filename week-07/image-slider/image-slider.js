@@ -1,38 +1,39 @@
 'use strict';
-const = [
+const photos= [
   { 
     file = 'sample.jpg',
-    title = '',
-    story = ''
+    title = 'Sample',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'tropical_beach.jpg',
+    title = 'Tropical Beach',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'canyon.jpg',
+    title = 'Canyon',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'horse.jpg',
+    title = 'Horses',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'welsh_corgi.jpg',
+    title = 'Welsh corgi',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'moonlight.jpg',
+    title = 'Moonlight',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'sample.jpg',
-    title = '',
-    story = ''
+    file = 'dragonfly.jpg',
+    title = 'Dragonfly',
+    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   }
 ]
+
