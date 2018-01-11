@@ -7,7 +7,18 @@
 #main-window {
   width: 100vw;
   height: 100vh;
-  background-color: darkgray;
+  background: linear-gradient(to right, grey, white, grey);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+main{
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .main-img {
