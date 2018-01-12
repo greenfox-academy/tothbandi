@@ -31,7 +31,7 @@ footer{
 
 .btn{
   width: 40px;
-  background-image: url("assets/arrow.svg"), linear-gradient(to bottom, lightgrey, white);
+  background-image: url("assets/arrow.svg"), linear-gradient(to bottom, grey, white);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -40,7 +40,7 @@ footer{
   transform: scaleX(-1);
 }
 
-.choosen-photo {
+.chosen-photo {
   background-image: url('images/canyon.jpg');
   background-size: 800px;
   width: 800px;
@@ -68,7 +68,7 @@ li{
   width: 80px;
   height: 80px;
   margin: 5px;
-  background: linear-gradient(to top, lightgrey, white);
+  background: linear-gradient(to bottom, white, grey);
 }
 
 .thumbnail {

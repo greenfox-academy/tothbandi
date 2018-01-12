@@ -1,39 +1,140 @@
 'use strict';
-const photos= [
+const photos = [
   { 
-    file = 'sample.jpg',
-    title = 'Sample',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'sample.jpg',
+    title : 'Sample',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'tropical_beach.jpg',
-    title = 'Tropical Beach',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'tropical_beach.jpg',
+    title : 'Tropical Beach',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'canyon.jpg',
-    title = 'Canyon',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'canyon.jpg',
+    title : 'Canyon',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'horse.jpg',
-    title = 'Horses',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'horse.jpg',
+    title : 'Horses',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'welsh_corgi.jpg',
-    title = 'Welsh corgi',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'welsh_corgi.jpg',
+    title : 'Welsh corgi',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'moonlight.jpg',
-    title = 'Moonlight',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'moonlight.jpg',
+    title : 'Moonlight',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
-    file = 'dragonfly.jpg',
-    title = 'Dragonfly',
-    story = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+    file : 'dragonfly.jpg',
+    title : 'Dragonfly',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   }
-]
+];
 
+const thumbnails = document.querySelectorAll('.thumbnail');
+const thumbBg = document.querySelectorAll('li');
+const chosenPhoto = document.querySelector('.chosen-photo');
+const thumbsCont = document.querySelector('.thumbs-cont');
+const rightBtn = document.querySelector('.right');
+const leftBtn = document.querySelector('.left');
+let activeThumb = 0;
+// console.log(document.querySelectorAll('li'));
+// consol.log(thumbBg);
+// let a = document.querySelector('.chosen-photo');
+// a.style.backgroundImage = 'url("images/sample.jpg")';
+
+// let lis = document.querySelectorAll('.thumbnail');
+// lis[0].style.backgroundImage
+
+rightBtn.addEventListener('click', (event) => {
+  if (activeThumb < thumbnails.length - 1){
+    setNormalThumbnail();
+    activeThumb++;
+    setChosenThumbnail(activeThumb);
+  } else {
+    oneStepLeft();
+  }
+});
+
+function oneStepLeft(){
+  for(let i = 1; i < thumbnails.length; i++){
+    thumbnails[i-1].style.backgroundImage = getFileFromThumb(i);
+    // thumbnails[i-1].setAttribute('data-index', thumbnails[i].dataset.index);
+    thumbnails[i-1].setAttribute('data-photosindex', thumbnails[i].dataset.photosindex);
+  }
+  let lastPhotosIndex = thumbnails[thumbnails.length - 1].dataset.photosindex;
+  if( lastPhotosIndex < photos.length - 1){
+    lastPhotosIndex++;
+
+  } else {
+    lastPhotosIndex = 0;
+  }
+  console.log(lastPhotosIndex);
+  console.log(photos[lastPhotosIndex].file);
+  thumbnails[thumbnails.length - 1].style.backgroundImage = 'url("images/' + photos[lastPhotosIndex].file + '")'; 
+  thumbnails[thumbnails.length - 1].setAttribute('data-photosindex', lastPhotosIndex);
+  setChosenPhoto(getFileFromThumb(activeThumb));  
+}
+
+function setNormalThumbnail() {
+  thumbBg[activeThumb].style.background='linear-gradient(to top, grey, white)' ; //setAttribute('background-color', 'red')); // .getAttribute('width'));
+}
+
+
+thumbsCont.addEventListener('click', function(event){
+  setNormalThumbnail();
+
+  // console.log(event.target.dataset.index);  //getAttribute('style'));
+  activeThumb = event.target.dataset.index;
+  setChosenThumbnail(activeThumb);
+
+});
+
+function setChosenPhoto(file){
+  // let str = 'url("images/' + photo.file + '")';
+
+  // console.log(str);
+  chosenPhoto.style.backgroundImage = file;
+}
+
+// setChosenPhoto(photos[1]);
+
+// thumbnails.forEach((thumbnail, index, array) => {
+//   thumbnail.style.backgroundImage = 'url("images/' + photos[index].file + '")';
+// });
+
+function styleChosenThumbnail(index){
+  thumbBg[index].style.background='linear-gradient(to bottom, grey, white)' ; //setAttribute('background-color', 'red')); // .getAttribute('width'));
+}
+
+function getFileFromThumb(index){
+  let file = thumbnails[index].getAttribute('style');
+  file = file.substring(18, file.length-1);
+  return file;  
+}
+
+function setChosenThumbnail(index){
+  // let file = thumbnails[index].getAttribute('style');
+  // file = file.substring(18, file.length-1);
+  // console.log(file);
+
+  setChosenPhoto(getFileFromThumb(index));
+  styleChosenThumbnail(index);
+}
+
+function initPhotoViewer(){
+  thumbnails.forEach((thumbnail, index, array) => {
+    thumbnail.style.backgroundImage = 'url("images/' + photos[index].file + '")';
+    thumbnail.setAttribute('data-index', index);
+    thumbnail.setAttribute('data-photosindex', index);
+  });
+  setChosenThumbnail(activeThumb);
+}
+
+initPhotoViewer();
