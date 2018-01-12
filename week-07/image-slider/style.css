@@ -32,8 +32,9 @@ footer{
 .btn{
   width: 40px;
   background-image: url("assets/arrow.svg"), linear-gradient(to bottom, grey, white);
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  outline: none;
 }
 
 .right{
@@ -80,4 +81,18 @@ li{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.btn:active{
+  background-image: url("assets/activearrow.svg"), linear-gradient(to bottom, grey, white);
+  /* border: 15px solid grey; */
+  outline: none;
+}
+
+.right:active {
+  box-shadow: inset -1px 1px 1px 1px #4e4e4e;
+}
+
+.left:active {
+  box-shadow: inset 1px 1px 1px 1px #4e4e4e;
 }
