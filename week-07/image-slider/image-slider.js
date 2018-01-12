@@ -62,6 +62,16 @@ rightBtn.addEventListener('click', (event) => {
   }
 });
 
+leftBtn.addEventListener('click', (event) => {
+  if (activeThumb > 0){
+    setNormalThumbnail();
+    activeThumb--;
+    setChosenThumbnail(activeThumb);
+  } else {
+    oneStepRight();
+  }
+});
+
 function oneStepLeft(){
   for(let i = 1; i < thumbnails.length; i++){
     thumbnails[i-1].style.backgroundImage = getFileFromThumb(i);
@@ -79,6 +89,25 @@ function oneStepLeft(){
   console.log(photos[lastPhotosIndex].file);
   thumbnails[thumbnails.length - 1].style.backgroundImage = 'url("images/' + photos[lastPhotosIndex].file + '")'; 
   thumbnails[thumbnails.length - 1].setAttribute('data-photosindex', lastPhotosIndex);
+  setChosenPhoto(getFileFromThumb(activeThumb));  
+}
+ 
+function oneStepRight(){
+  for(let i = thumbnails.length - 2; i >= 0 ; i--){
+    thumbnails[i+1].style.backgroundImage = getFileFromThumb(i);
+    // thumbnails[i-1].setAttribute('data-index', thumbnails[i].dataset.index);
+    thumbnails[i+1].setAttribute('data-photosindex', thumbnails[i].dataset.photosindex);
+  }
+  let firstPhotosIndex = thumbnails[0].dataset.photosindex;
+  if( firstPhotosIndex > 0){
+    firstPhotosIndex--;
+  } else {
+    firstPhotosIndex = photos.length - 1;
+  }
+  console.log(firstPhotosIndex);
+  console.log(photos[firstPhotosIndex].file);
+  thumbnails[0].style.backgroundImage = 'url("images/' + photos[firstPhotosIndex].file + '")'; 
+  thumbnails[0].setAttribute('data-photosindex', firstPhotosIndex);
   setChosenPhoto(getFileFromThumb(activeThumb));  
 }
 
