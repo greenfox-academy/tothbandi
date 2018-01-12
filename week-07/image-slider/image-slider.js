@@ -43,6 +43,8 @@ const chosenPhoto = document.querySelector('.chosen-photo');
 const thumbsCont = document.querySelector('.thumbs-cont');
 const rightBtn = document.querySelector('.right');
 const leftBtn = document.querySelector('.left');
+const photoTitle = document.querySelector('.title');
+const photoDesc = document.querySelector('.story');
 let activeThumb = 0;
 // console.log(document.querySelectorAll('li'));
 // consol.log(thumbBg);
@@ -89,7 +91,7 @@ function oneStepLeft(){
   console.log(photos[lastPhotosIndex].file);
   thumbnails[thumbnails.length - 1].style.backgroundImage = 'url("images/' + photos[lastPhotosIndex].file + '")'; 
   thumbnails[thumbnails.length - 1].setAttribute('data-photosindex', lastPhotosIndex);
-  setChosenPhoto(getFileFromThumb(activeThumb));  
+  setChosenPhoto(thumbnails[activeThumb].dataset.photosindex);    
 }
  
 function oneStepRight(){
@@ -108,7 +110,7 @@ function oneStepRight(){
   console.log(photos[firstPhotosIndex].file);
   thumbnails[0].style.backgroundImage = 'url("images/' + photos[firstPhotosIndex].file + '")'; 
   thumbnails[0].setAttribute('data-photosindex', firstPhotosIndex);
-  setChosenPhoto(getFileFromThumb(activeThumb));  
+  setChosenPhoto(thumbnails[activeThumb].dataset.photosindex);  
 }
 
 function setNormalThumbnail() {
@@ -126,11 +128,14 @@ thumbsCont.addEventListener('click', function(event){
 
 });
 
-function setChosenPhoto(file){
+function setChosenPhoto(photoIndex){
   // let str = 'url("images/' + photo.file + '")';
 
   // console.log(str);
-  chosenPhoto.style.backgroundImage = file;
+  chosenPhoto.style.backgroundImage = 'url("images/' + photos[photoIndex].file + '")';
+  photoTitle.textContent = photos[photoIndex].title;
+  photoDesc.textContent = photos[photoIndex].story;
+
 }
 
 // setChosenPhoto(photos[1]);
@@ -155,8 +160,8 @@ function setChosenThumbnail(index){
   // let file = thumbnails[index].getAttribute('style');
   // file = file.substring(18, file.length-1);
   // console.log(file);
-
-  setChosenPhoto(getFileFromThumb(index));
+// getFileFromThumb(index)
+  setChosenPhoto(thumbnails[index].dataset.photosindex);
   styleChosenThumbnail(index);
 }
 
