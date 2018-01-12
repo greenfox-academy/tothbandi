@@ -20,7 +20,8 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
-  padding-bottom: 1%;
+  margin-bottom: 1%;
+  box-shadow: 0 10px 5px gray;
 }
 
 footer{
@@ -70,6 +71,8 @@ li{
   height: 80px;
   margin: 5px;
   background: linear-gradient(to bottom, white, grey);
+  box-shadow: none;
+
 }
 
 .thumbnail {

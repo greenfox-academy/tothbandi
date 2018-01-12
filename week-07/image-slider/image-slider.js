@@ -113,6 +113,7 @@ function oneStepRight(){
 
 function setNormalThumbnail() {
   thumbBg[activeThumb].style.background='linear-gradient(to top, grey, white)' ; //setAttribute('background-color', 'red')); // .getAttribute('width'));
+  thumbBg[activeThumb].style.boxShadow = '0 0 0 grey';
 }
 
 
@@ -140,6 +141,8 @@ function setChosenPhoto(file){
 
 function styleChosenThumbnail(index){
   thumbBg[index].style.background='linear-gradient(to bottom, grey, white)' ; //setAttribute('background-color', 'red')); // .getAttribute('width'));
+  //   box-shadow: 0 10px 5px gray;
+  thumbBg[index].style.boxShadow = '0 -10px 5px grey';
 }
 
 function getFileFromThumb(index){
