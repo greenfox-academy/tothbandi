@@ -1,11 +1,16 @@
 'use strict';
 const photos = [
   { 
-    file : 'sample.jpg',
-    title : 'Sample',
+    file : 'white.jpg',
+    title : 'White',
     story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
   },
   { 
+    file : 'sample.jpg',
+    title : 'Sample',
+    story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
+  },  
+  {
     file : 'tropical_beach.jpg',
     title : 'Tropical Beach',
     story : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. '
@@ -64,7 +69,6 @@ function keyPressed(event){
   if(event.code === 'ArrowLeft'){
     leftEvent();
   }
-  // document.querySelector('h1').innerText = 'Last pressed key code is: ' + event.code;
 }
 
 function rightEvent(){
