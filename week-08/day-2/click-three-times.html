@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Click three times</title>
+</head>
+<body>
+  <button style="display:block">Button</button>
+  <p></p>
+  <script>
+    'use strict';
+    let countClick = 0;
+    let ellapsed = false;
+    function printIfPossible(){
+      if(countClick >= 3 && ellapsed){
+        document.querySelector('p')
+          .textContent = '5 seconds ellapsed and clicked 3 times';
+      }
+    }
+    setTimeout(function(){
+      ellapsed = true;
+      printIfPossible();
+    }, 5000);
+    let button = document.querySelector('button');
+    button.addEventListener('click',function(){
+      countClick++;
+      printIfPossible();
+    });
+  </script>
+</body>
+</html>
