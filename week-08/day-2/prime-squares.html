@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prime squares</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: arial;
+        }
+        section {
+            display: grid;
+            grid-auto-rows: 50px;
+            grid-template-columns: repeat(10, 1fr);
+            width: 1000px;
+            margin: 0 auto;
+        }
+        section div {
+            box-shadow: 0px 0px 10px #666 inset;
+            text-align: center;
+            line-height: 50px;
+        }
+        .not-prime {
+            background: tomato;
+        }
+        .prime {
+            background: limegreen;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div>1</div>
+    </section>
+
+    <script>
+        // 1: generate 100 divs to the <section> element and add index numbers to it as the element's textContent
+
+          let section = document.querySelector('section');
+
+          for(let i = 2; i <= 100; i++){
+            let child = section.appendChild(document.createElement('div'));
+            child.textContent = i;
+          }
+        // 2: Create a function that adds a 'not-prime' class to a div if it's not a prime and 'prime' if it is
+
+          let counter = 0;
+          let divs = document.querySelectorAll('div');
+
+          function isPrime(number){
+
+            if(number < 2 ){
+              return true;
+            }
+
+            let countDivisor = 1;
+
+            for(let i = 2; i <= number ** 0.5; i++){
+
+              if(number % i === 0) {
+                countDivisor++;
+              }
+
+            }
+
+            return countDivisor === 1;
+
+          }
+
+          function addsIfPrime(){
+
+            if (isPrime(counter + 1)){
+
+              divs[counter].setAttribute('class', 'prime');
+
+            } else {
+
+              divs[counter].setAttribute('class', 'not-prime');
+
+            }
+
+          }
+
+        // 3: Create a timer that keeps calling the prime validatior function until it reaches the end of elements
+        //  - the timer should fire every 100ms
+        //  - the timer should stop when there are no more elements left to be colored
+        
+          let intervalId = setInterval(function() {
+
+            addsIfPrime();
+            
+            counter++;
+            
+            if (counter === divs.length) {
+              killInterval();
+            }
+
+          } ,100);
+
+          function killInterval(){
+            clearInterval(intervalId);
+          }
+
+    </script>
+</body>
+</html>
