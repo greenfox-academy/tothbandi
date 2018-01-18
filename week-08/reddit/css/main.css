@@ -4,6 +4,11 @@
   font-family: 'Lato', sans-serif;
 }
 
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
 body{
   background-color: #e3e3e3;
 }
@@ -22,6 +27,10 @@ body{
   margin-bottom: 20px;
 }
 
+/* .content{
+  height: 100%;
+} */
+
 .panel{
   display: inline-block;
   margin-left: 10px;
@@ -30,6 +39,7 @@ body{
 .posts{
   width: calc(70% - 20px);
   float: left;
+  /* overflow-y: scroll; */
 }
 
 .new-post{
@@ -46,4 +56,24 @@ body{
   background-color: white;
   margin-bottom: 1px;
   padding: 10px 60px;
+
+}
+
+.link-to-post, .submitted{
+
+
+  /* color: darkgray; */
+  font-size: 0.9em;
+}
+
+.link-to-post, .user{
+    text-decoration-line: none;
+}
+
+.link-to-post{
+  margin-right: 5px;
+}
+
+.post-title{
+  margin-bottom: 5px;
 }
