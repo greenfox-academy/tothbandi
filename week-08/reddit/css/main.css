@@ -36,6 +36,12 @@ body{
   margin-left: 10px;
 }
 
+.post{
+  background-color: white;
+  margin-bottom: 1px;
+  padding: 10px 60px;
+
+}
 .posts{
   width: calc(70% - 20px);
   float: left;
@@ -52,12 +58,7 @@ body{
   margin-left: 3em;
 }
 
-.post{
-  background-color: white;
-  margin-bottom: 1px;
-  padding: 10px 60px;
 
-}
 
 .link-to-post, .submitted{
 
@@ -76,4 +77,55 @@ body{
 
 .post-title{
   margin-bottom: 5px;
+}
+
+.link-to-new-post{
+  display: block;
+  background-color: cornflowerblue;
+  color: white;
+  text-transform: uppercase;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  text-decoration-line: none;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.title-new-post{
+  /* display: block; */
+  background-color: #f3f3f3;
+  /* color: white; */
+  text-transform: uppercase;
+  font-size: 1em;
+  height: 2em;
+  line-height: 2em;
+  /* text-align: center; */
+  font-weight: bolder;
+  padding-left: 1em;
+  margin-bottom: 5px;
+}
+
+.link-to-this{
+  text-transform: lowercase;
+  text-decoration-line: none;
+  padding-left: 5px;
+  font-weight: bolder;
+
+}
+
+.descripton-new-post{
+  background-color: #ececec;
+  padding-bottom: 2em;
+}
+
+.goal-new-post{
+  text-align: center;
+  height: 2em;
+  line-height: 2em;
+
+}
+
+.sentence-new-post{
+  text-transform: capitalize;
 }
