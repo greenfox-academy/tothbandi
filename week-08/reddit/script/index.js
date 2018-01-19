@@ -1,8 +1,11 @@
 'use strict';
 
-let redditRequest = new XMLHttpRequest();
+let counter;
 
-redditRequest.open('GET', 'http://secure-reddit.herokuapp.com/simple/posts', true);
+let redditRequest = new XMLHttpRequest();
+//http://secure-reddit.herokuapp.com/simple
+//https://time-radish.glitch.me/posts
+redditRequest.open('GET', 'https://time-radish.glitch.me/posts');
 redditRequest.setRequestHeader('Accept', 'application/json');
 redditRequest.send();
 redditRequest.onreadystatechange = function(){
@@ -14,7 +17,7 @@ redditRequest.onreadystatechange = function(){
   }
 };
 
-const toNewPost = document.querySelector('.link-to-new-post');
+const toNewPost = document.querySelector('.link-to');
 toNewPost.setAttribute('href', 'post.html');
 
 function generatePosts(data){
@@ -27,7 +30,8 @@ function generatePosts(data){
 function createPost(element){
   let post = document.createElement('article');
   post.classList.add('post');
-  post.appendChild(createCounter(element.score));
+  counter = createCounter(element.score);
+  post.appendChild(counter);
   post.appendChild(createPostContent(element));
   return post;
 } 
@@ -86,7 +90,8 @@ function createPostContent(element){
 }
 
 function timeSpend(timestamp){
-  timestamp /= 1000;
+  timestamp -= Date.now();
+
   let minutes = convert(timestamp, 60);
   let hours = convert(minutes, 60);
   let days = convert(hours, 24);
