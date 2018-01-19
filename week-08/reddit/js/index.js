@@ -14,6 +14,9 @@ redditRequest.onreadystatechange = function(){
   }
 };
 
+const toNewPost = document.querySelector('.link-to-new-post');
+toNewPost.setAttribute('href', 'post.html');
+
 function generatePosts(data){
   let posts = document.querySelector('.posts');
   data.posts.forEach(element => {
