@@ -103,15 +103,17 @@ function createPostContent(element){
   // console.log(testu);
   // user.textContent = testu;
 
-  submitted.innerHTML = 'submitted ' + timeSpend(element.timestamp) + ' by <a href="" class="user">' + textUser(element.user) + '</a>';
+  submitted.innerHTML = 'submitted ' + timeSpend(element.timestamp) + ' by <a href="#" class="user">' + textUser(element.user) + '</a>';
   content.appendChild(submitted);
   let links = document.createElement('div');
   links.classList.add('links-to-post');
   let link = document.createElement('a');
   link.classList.add('link-to-post');
+  link.setAttribute('href', '#');
   link.textContent = 'modify';
   let link2 = document.createElement('a');
   link2.classList.add('link-to-post');
+  link2.setAttribute('href', '#');
   link2.textContent = 'remove';
   links.appendChild(link);
   links.appendChild(link2);
