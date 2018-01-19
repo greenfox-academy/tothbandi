@@ -1,10 +1,14 @@
 'use strict';
 
 let counter;
+let arrowUp;
+let arrowDown;
+
+
 
 let redditRequest = new XMLHttpRequest();
 //http://secure-reddit.herokuapp.com/simple
-//https://time-radish.glitch.me/posts
+//https://time-radish.glitch.me
 redditRequest.open('GET', 'https://time-radish.glitch.me/posts');
 redditRequest.setRequestHeader('Accept', 'application/json');
 redditRequest.send();
@@ -14,8 +18,33 @@ redditRequest.onreadystatechange = function(){
     console.log(data);
     console.log(data.posts[0]);
     generatePosts(data);
+    window.addEventListener('click', event => vote(event, data));
   }
 };
+
+function vote(event, data){
+  // console.log(event.target.classList);
+  let id = event.target.parentElement.dataset.id;
+  let direction = event.target.classList[0];
+  let url = `https://time-radish.glitch.me/posts/${id}/${direction}vote`;
+  console.log(url);
+  redditRequest.open('PUT', url);
+  redditRequest.setRequestHeader('Accept', 'application/json');
+  redditRequest.send();
+  redditRequest.onreadystatechange = function(){
+    console.log(redditRequest);
+    if(redditRequest.readyState === 4 && redditRequest.status === 200){
+      let data = JSON.parse(redditRequest.responseText);
+      console.log('data = ', data);
+      console.log(event.target.parentElement.childNodes[1]);
+      event.target.parentElement.childNodes[1].textContent = data.score;
+      // console.log(data.posts[0]);
+    //   generatePosts(data);
+    //   window.addEventListener('click', event => vote(event, data));
+     }
+  };
+}
+
 
 const toNewPost = document.querySelector('.link-to');
 toNewPost.setAttribute('href', 'post.html');
@@ -30,27 +59,28 @@ function generatePosts(data){
 function createPost(element){
   let post = document.createElement('article');
   post.classList.add('post');
-  counter = createCounter(element.score);
+  createCounter(element.score, element.id);
   post.appendChild(counter);
   post.appendChild(createPostContent(element));
   return post;
 } 
 
-function createCounter(score){
-  let counter = document.createElement('div');
+function createCounter(score, id){
+  counter = document.createElement('div');
   counter.classList.add('counter');
-  let arrowUp = document.createElement('button');
+  counter.setAttribute('data-id', id);
+  arrowUp = document.createElement('button');
   arrowUp.classList.add('up', 'arrow');
   let likeCounter = document.createElement('p');
   likeCounter.classList.add('like-counter');
   likeCounter.setAttribute('data-like-counter', score);
   likeCounter.textContent = score;
-  let arrowDown = document.createElement('button');
+  arrowDown = document.createElement('button');
   arrowDown.classList.add('down', 'arrow');
   counter.appendChild(arrowUp);
   counter.appendChild(likeCounter);
   counter.appendChild(arrowDown);
-  return counter;
+  // return counter;
 }
 
 function createPostContent(element){
@@ -123,3 +153,4 @@ function textUser(user){
   }
   return user;
 }
+
