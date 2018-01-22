@@ -4,52 +4,49 @@ let counter;
 let arrowUp;
 let arrowDown;
 
+sendMessage('GET');
 
-
-let redditRequest = new XMLHttpRequest();
-//http://secure-reddit.herokuapp.com/simple
-//https://time-radish.glitch.me
-redditRequest.open('GET', 'https://time-radish.glitch.me/posts');
-redditRequest.setRequestHeader('Accept', 'application/json');
-redditRequest.send();
-redditRequest.onreadystatechange = function(){
-  if(redditRequest.readyState === 4){
-    let data = JSON.parse(redditRequest.responseText);
-    console.log(data);
-    console.log(data.posts[0]);
-    generatePosts(data);
-    window.addEventListener('click', event => vote(event, data));
+function sendMessage(method, id, direction, event){
+  const server = 'http://secure-reddit.herokuapp.com/simple'; // user
+// const server = 'https://time-radish.glitch.me'; // owner
+  let redditRequest = new XMLHttpRequest();
+  if(method === 'GET'){
+    redditRequest.open('GET', `${server}/posts`);
+  } else if(method === 'PUT'){
+    let url = `${server}/posts/${id}/${direction}vote`;
+    redditRequest.open('PUT', url);
   }
-};
-
-function vote(event, data){
-  // console.log(event.target.classList);
-  let id = event.target.parentElement.dataset.id;
-  let direction = event.target.classList[0];
-  let url = `https://time-radish.glitch.me/posts/${id}/${direction}vote`;
-  console.log(url);
-  redditRequest.open('PUT', url);
   redditRequest.setRequestHeader('Accept', 'application/json');
   redditRequest.send();
   redditRequest.onreadystatechange = function(){
-    console.log(redditRequest);
-    if(redditRequest.readyState === 4 && redditRequest.status === 200){
+    if(redditRequest.readyState === 4){
       let data = JSON.parse(redditRequest.responseText);
-      console.log('data = ', data);
-      console.log(event.target.parentElement.childNodes[1]);
-      event.target.parentElement.childNodes[1].textContent = data.score;
-      // console.log(data.posts[0]);
-    //   generatePosts(data);
-    //   window.addEventListener('click', event => vote(event, data));
-     }
-  };
+      if(method === 'GET'){
+        generatePosts(data);
+      } else if (method === 'PUT'){
+        event.target.parentElement.childNodes[1].textContent = data.score;
+      }
+    }
+  }
 }
 
+window.addEventListener('click', function(event){
+  if(event.target.classList.contains('arrow')){
+   let id = event.target.parentElement.dataset.id;
+   let direction = event.target.classList[0];
+   sendMessage('PUT', id, direction, event);
+  }
+});
+
+window.addEventListener('mouseup',function(event){
+  event.target.style.backgroundImage = `url("assets/${event.target.classList[0]}voted.png")`;
+});
 
 const toNewPost = document.querySelector('.link-to');
 toNewPost.setAttribute('href', 'post.html');
 
 function generatePosts(data){
+  console.log(`data: ${data}`);
   let posts = document.querySelector('.posts');
   data.posts.forEach(element => {
     posts.appendChild(createPost(element));
@@ -80,39 +77,55 @@ function createCounter(score, id){
   counter.appendChild(arrowUp);
   counter.appendChild(likeCounter);
   counter.appendChild(arrowDown);
-  // return counter;
 }
 
 function createPostContent(element){
+  let href = '';
+  if((typeof element.href) === 'undefined'){
+    href = element.url;
+  } else {
+    href = element.href;
+  }
+  let url = '#';
+  let domain = '';
+  if(href !== ''){
+    let sections = href.split('/');
+    while(sections[0] === 'http:' || sections[0] === 'https:' || sections[0] === ''){
+      sections.shift();
+    }
+    let point = sections[0].lastIndexOf('.');
+    let end = sections[0].length - 1;
+    if(point !== -1 && (point === end - 2 || point === end - 3)){
+      url = href;
+      domain = sections[0];
+    }
+  }
+  let user = element.user;
+  if (typeof user === 'undefined'){
+    user = element.owner;
+  }
+  if (user === '' || user === null){
+    user = 'Anonymus';
+  }
   let content = document.createElement('div');
   content.classList.add('post-content');
+  content.setAttribute('data-id', element.id);
   let title = document.createElement('h2');
   title.classList.add('post-title');
-  title.textContent = element.title;
+  title.innerHTML = `${element.title} <a href="${url}" class="show-url">(${domain})</a>`;
   content.appendChild(title);
   let submitted = document.createElement('p');
   submitted.classList.add('submitted');
-  // let timeLeft = document.createElement('span');
-  // timeLeft.classList.add('time-left');
-  // let testString = timeSpend(element.timestamp);
-  // console.log(testString);
-  // timeLeft.textContent = testString;
-  // let user = document.createElement('a');
-  // user.classList.add('user');
-  // let testu = textUser(element.user);
-  // console.log(testu);
-  // user.textContent = testu;
-
-  submitted.innerHTML = 'submitted ' + timeSpend(element.timestamp) + ' by <a href="#" class="user">' + textUser(element.user) + '</a>';
+  submitted.innerHTML = 'submitted ' + timeSpend(element.timestamp) + ' by <a href="#" class="user">' + user + '</a>';
   content.appendChild(submitted);
   let links = document.createElement('div');
-  links.classList.add('links-to-post');
+  links.classList.add('links-in-post');
   let link = document.createElement('a');
-  link.classList.add('link-to-post');
+  link.classList.add('link-in-post');
   link.setAttribute('href', '#');
   link.textContent = 'modify';
   let link2 = document.createElement('a');
-  link2.classList.add('link-to-post');
+  link2.classList.add('link-in-post');
   link2.setAttribute('href', '#');
   link2.textContent = 'remove';
   links.appendChild(link);
@@ -122,37 +135,32 @@ function createPostContent(element){
 }
 
 function timeSpend(timestamp){
-  timestamp -= Date.now();
 
-  let minutes = convert(timestamp, 60);
-  let hours = convert(minutes, 60);
-  let days = convert(hours, 24);
-  let months = convert(days, 30);
-  let years = convert(months, 12);
+  if(timestamp < 10000000000){
+    timestamp *= 1000;
+  }
+
+  timestamp = Date.now() - timestamp;
+  timestamp = Math.floor(timestamp / 1000);
+  let minutes = Math.floor(timestamp / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+  let months = Math.floor(days / 30);
+  let years = Math.floor(months / 12);
 
   if (years > 0){
-    return years + ' years ago';
+    return `${years} years ago`;
   } else if (months > 0){
-    return months + ' months ago';
+    return `${months} months ago`;
   } else if (days > 0){
-    return days + ' days ago';
+    return `${days} days ago`;
   } else if (hours > 0){
-    return hours + ' hours ago';
+    return `${hours} hours ago`;
   } else if (minutes > 0) {
-    return minutes + ' minutes ago';
+    return `${minutes} minutes ago`;
   } else {
     return 'right now';
   }
 }
 
-function convert(time, factor){
-  return (time - time % factor) / factor;
-}
-
-function textUser(user){
-  if (user === null) {
-    return 'Anonymus'
-  }
-  return user;
-}
 

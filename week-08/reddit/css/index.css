@@ -17,7 +17,7 @@ body{
 .header{
   height: 200px;
   padding-top: 30px;
-  background: url("../assets/horsehead_nebula.jpg") 0 no-repeat;
+  background: url("../assets/banner.jpg") 0 no-repeat;
   background-size: cover;
   border: none;
   color: white;
@@ -27,6 +27,8 @@ body{
   letter-spacing: 4rem;
   text-align: center;
   margin-bottom: 20px;
+  position: sticky;
+
 }
 
 .content{
@@ -53,11 +55,18 @@ body{
 
 }
 
+.link-in-post, .show-url, .user{
+  font-size: 0.9rem;
+  text-decoration-line: none;
+  color: #838383;
+  margin-right: 5px;
+}
 
 .new-post{
   width: calc(30% - 10px);
   float: right;
   margin-right: 10px;
+  position: fixed;
 }
 
 .sentence-new-post{
@@ -66,18 +75,12 @@ body{
   text-transform: capitalize;
 }
 
-.link-to-post, .submitted{
+.submitted{
   /* color: darkgray; */
   font-size: 0.9em;
 }
 
-.link-to-post, .user{
-    text-decoration-line: none;
-}
 
-.link-to-post{
-  margin-right: 5px;
-}
 
 .post-title{
   width: 100%;
@@ -118,17 +121,17 @@ body{
   font-weight: bolder;
 
 }
-
-.descripton-new-post{
-  background-color: #ececec;
-  padding-bottom: 2em;
-}
-
 .goal-new-post{
   text-align: center;
   padding: 0.5em 0;
   width: 100%;
 }
+.descripton-new-post{
+  background-color: #ececec;
+  padding-bottom: 2em;
+}
+
+
 
 
 
@@ -177,6 +180,13 @@ body{
   overflow-wrap: normal;
 }
 
-/* .up, .down, .like-counter{
-  height: 30%;
+.arrow:hover{
+  cursor: pointer;
+}
+
+/* .up:{
+  background-image: url("../assets/upvoted.png");
+}
+.down:released{
+  background-image: url("../assets/downvoted.png");
 } */

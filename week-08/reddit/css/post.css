@@ -17,13 +17,13 @@ body{
 .header{
   height: 200px;
   padding-top: 30px;
-  background: url("../assets/horsehead_nebula.jpg") 0 no-repeat;
+  background: url("../assets/banner.jpg") 0 no-repeat;
   background-size: cover;
   border: none;
   color: white;
   text-transform: uppercase;
   font-size: 2rem;
-  font-weight: lighter;
+  font-weight: 100;
   letter-spacing: 4rem;
   text-align: center;
   margin-bottom: 20px;
@@ -37,9 +37,15 @@ body{
 }
 
 .content{
-  width: 50%;
+  width: 40%;
   height: 100%;
   margin: 10px;
+}
+
+
+.inputs{
+  background-color: #f3f3f3;
+  padding: 10px;
 }
 
 .link-to{
@@ -55,4 +61,23 @@ body{
   font-weight: bolder;
   margin-bottom: 5px;
   width: 60%;
+}
+
+.label{
+  display: block;
+  padding-bottom: 5px;
+  font-weight: bolder;
+}
+
+.label-title::before{
+  content: '*';
+  color: red;
+}
+
+.input{
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  padding: 0.1em;
 }

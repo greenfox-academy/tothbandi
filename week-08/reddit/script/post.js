@@ -3,6 +3,8 @@
 const titleInput = document.querySelector('.input-title');
 const urlInput = document.querySelector('.input-url');
 const submit = document.querySelector('.link-to');
+// const server = 'http://secure-reddit.herokuapp.com/simple';
+const server = 'https://time-radish.glitch.me';
 
 
 function sendPost(){
@@ -15,9 +17,8 @@ function sendPost(){
   postBody.title = title;
   postBody.url = url;
   let redditRequest = new XMLHttpRequest();
-//http://secure-reddit.herokuapp.com/simple
-//https://time-radish.glitch.me/posts
-  redditRequest.open('POST', 'https://time-radish.glitch.me/posts');
+
+  redditRequest.open('POST', `${server}/posts`);
   redditRequest.setRequestHeader('Accept', 'application/json');
   redditRequest.setRequestHeader('Content-Type', 'application/json');
 
