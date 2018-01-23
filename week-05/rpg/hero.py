@@ -14,7 +14,6 @@ class Hero(Character):
             self.set_strike_point()
             )
         self.direction = {37: 'left', 38: 'up', 39: 'right', 40: 'down'}
-        self.rand = Randomize() # NO INSTANTIATION --- USE ON FLY
     
     def move(self, direction, can_go):
         self.image = 'accessories/hero-{}.png'.format(direction)
@@ -25,10 +24,10 @@ class Hero(Character):
         return 20 + 3 * 6
     
     def set_current_health_point(self):
-        return 20 + 3 * self.rand.d6()
+        return 20 + 3 * Randomize().d6()
 
     def set_defend_point(self):
-        return 2 * self.rand.d6()
+        return 2 * Randomize().d6()
 
     def set_strike_point(self):
-        return 5 + self.rand.d6()
+        return 5 + Randomize().d6()

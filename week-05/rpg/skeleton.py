@@ -6,7 +6,8 @@ class Skeleton(Character):
 
     one_is_boss = False
 
-    def __init__(self, posx, posy):
+    def __init__(self, posx, posy, level = Randomize().randlevel(Boards().level)):
+        self.level = level
         super().__init__(
             'accessories/skeleton.png',
             posx,
@@ -18,8 +19,6 @@ class Skeleton(Character):
             )
         self.is_boss = False
         self.has_key = False
-        self.rand = Randomize()
-        self.level = self.rand.randlevel(Boards().level)
     
     def set_to_boss(self):
         if not Skeleton.one_is_boss:
@@ -27,8 +26,8 @@ class Skeleton(Character):
             self.is_boss = True
             self.image = 'accessories/boss.png'
             self.max_health_point += 6
-            self.current_health_point += self.rand.d6()
-            self.defend_point += int(self.rand.d6() / 2)
+            self.current_health_point += Randomize().d6()
+            self.defend_point += int(Randomize().d6() / 2)
             self.strike_point += self.level
     
     def set_key(self):
@@ -43,10 +42,10 @@ class Skeleton(Character):
         return 2 * self.level * 6
     
     def set_current_health_point(self):
-        return 2 * self.level * self.rand.d6()
+        return 2 * self.level * Randomize().d6()
 
     def set_defend_point(self):
-        return int(self.level / 2 * self.rand.d6())
+        return int(self.level / 2 * Randomize().d6())
 
     def set_strike_point(self):
-        return self.level * self.rand.d6()
+        return self.level * Randomize().d6()
