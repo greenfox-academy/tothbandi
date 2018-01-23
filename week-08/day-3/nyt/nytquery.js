@@ -6,6 +6,9 @@ url += '?api-key=6bb5e94b1dd24f45a8962bb40df2ac1e&q=the moon landing by Apollo 1
 let myRequest = new XMLHttpRequest();
 myRequest.open('GET', url, true);
 myRequest.send(null);
+
+console.log(myRequest);
+
 myRequest.onload = function(){
   let myData = JSON.parse(myRequest.responseText);
 
@@ -30,14 +33,5 @@ myRequest.onload = function(){
 
   body.appendChild(ul);
 
-  // console.log(myData);
-
-
 };
 
-// console.log(window.location.protocol + "//" + window.location.host + "/" + window.location.pathname)
-
-// myData.response.docs[index]
-// // .headline.main
-// // .snippet
-// // .pub_date first ten char
