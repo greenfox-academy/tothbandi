@@ -1,0 +1,74 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+body{
+  padding: 5% 25%;
+  background-color: brown;
+}
+
+main{
+  display: inline-block;
+  width: 50%;
+  height: 80%;
+  vertical-align: bottom;
+}
+
+.panel, .quart{
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.panel{
+  width: 46%;
+  height: 100%;
+  margin: 0 1%;
+}
+
+.quart{
+  width: 100%;
+  height: 50%;
+  padding: 30% 20%;
+}
+
+.btn{
+  display: inline-block;
+  box-sizing: content-box;
+  width: 100%;
+  height: 50%;
+  margin: 2% 0;
+  min-height: 20px;
+  border-radius: 5px;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.floor{
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 100%;
+  height: 9%;
+  margin: 2% 0;
+  padding: 2% 0;
+  background-color: white;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font: bold 1.5em 'Arial', 'Helvetica', sans-serif;
+}
+
+.actual {
+  background-color: green;
+}
