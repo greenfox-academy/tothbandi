@@ -26,7 +26,7 @@ input.oninput = function(){
 button.onclick = function(){
   let url = 'https://yoda.p.mashape.com/yoda?sentence=';
   url += input.value.split(' ').join('+');
-  let apikey = 'inCAzy7FALmshtuNU549foZvTxK8p1WIeIOjsnyjeNdcRbdmJL';
+  let apikey = '5mTSLQJVTDmshrtJtJVNaO80Jn1sp1bLfwvjsn3Apsq52aLvHM';
 
   let myHttpRequest = new XMLHttpRequest();
 
