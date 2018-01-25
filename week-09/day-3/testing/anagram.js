@@ -2,16 +2,17 @@
 
 function getLetters(str){
   let letters = str.split('');
-  let countOfLetters = {};
-  letters.forEach(element => {
-    if(element !== ' '){
-      if((Object.keys(countOfLetters)).includes(element)){
-        countOfLetters[element] += 1;
-      } else {
-        countOfLetters[element] = 1;
+  let countOfLetters = letters.reduce(function (countedLetters, letter) { 
+    if (letter !== ' '){
+      if (letter in countedLetters) {
+        countedLetters[letter]++;
+      }
+      else {
+        countedLetters[letter] = 1;
       }
     }
-  });
+    return countedLetters;
+  }, {});
   return countOfLetters;
 }
 
