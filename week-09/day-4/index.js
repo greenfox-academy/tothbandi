@@ -12,13 +12,25 @@ app.get('/', (req, res) => {
 });
 
 app.get('/doubling', (req, res) => {
-    console.log('====', req.query.input);
     let resObj = {};
     if(req.query.input === undefined){
-        resObj.error = "Please provide an input!";
+        resObj.error = 'Please provide an input!';
     } else {
         resObj.received = req.query.input;
         resObj.result = req.query.input * 2;
+    }
+    res.send(res.json(resObj));
+});
+
+app.get('/greeter', (req, res) => {
+    let resObj = {};
+    if(req.query.name === undefined){
+        resObj.error = 'Please provide a name!';
+    } else if (req.query.title === undefined) {
+        resObj.error = 'Please provide a title!';
+    } 
+    else {
+        resObj.welcome_message = `Oh, hi there ${req.query.name}, my dear ${req.query.title}!`;
     }
     res.send(res.json(resObj));
 });
