@@ -1,10 +1,8 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.json());
 app.use('/assets', express.static('assets'));
 
 app.get('/', (req, res) => {
@@ -33,6 +31,17 @@ app.get('/greeter', (req, res) => {
         resObj.welcome_message = `Oh, hi there ${req.query.name}, my dear ${req.query.title}!`;
     }
     res.send(res.json(resObj));
+});
+
+app.get('/appenda/:appendable', (req, res) => {
+    let resObj = {};
+    resObj.appended = req.params.appendable + 'a';
+    res.send(res.json(resObj));
+});
+
+app.get('/appenda', (req, res) => {
+    res.status(404);
+    res.send();
 });
 
 app.listen(8080);
