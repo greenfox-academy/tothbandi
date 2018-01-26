@@ -48,6 +48,7 @@ app.get('/appenda', (req, res) => {
 
 app.post('/dountil/:action', (req, res) => {
     let resObj = {};
+
     let n = req.body.until;
     if (req.params.action === 'sum') {
         resObj.result = n * (n + 1) / 2;
