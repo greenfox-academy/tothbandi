@@ -37,7 +37,6 @@ app.post('/sith', (req, res) => {
                 .filter(sentence => sentence !== '')
                 .map(sentence => sentence.trim())
                 .map(sentence => sentence.split(' '));
-        console.log(text);
         text = text.map(sentence => {
             for(let i = 0; i < sentence.length - 2; i += 2){
                 [sentence[i], sentence[i+1]] = [sentence[i+1], sentence[i]];
@@ -46,17 +45,16 @@ app.post('/sith', (req, res) => {
             word[0] = word[0].toUpperCase();
             sentence[0] = word.join('');
             sentence = sentence.join(' ').concat('.');
-            console.log(sentence);
             let blah = [' Arrgh.', ' Uhm.', ' Err..Err.er.'];
             for(let i = 0; i <= randInt(2); i++){
                 sentence = sentence.concat(blah[randInt(3)]);
-                console.log(sentence);
             }
             return sentence;
         });
         resObj.sith_text = text.join(' ');
     }
-    res.send(res.json(resObj));
+    res.json(resObj);
+    res.send();
 });
 
 app.listen(8080);
