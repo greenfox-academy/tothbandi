@@ -23,9 +23,12 @@
                 <div class="artwork"></div>
             </header>
 
-            <div class="playlist alltracks"><span>All tracks</span></div>
-            <div class="playlist favorites"><span>Favorites</span></div>
-            <div class="playlist-list">
+            <div class="default-lists">
+                <div class="playlist alltracks"><span>All tracks</span></div>
+
+                <div class="playlist favorites"><span>Favorites</span></div>
+            </div>
+            <div class="playlist-list user-lists">
                 <div class="playlist"><span>First list</span> 
                     <div class="playlist-delete">x</div>
                 </div>
@@ -110,18 +113,19 @@
                 <div class="audio-control rew"></div>
                 <div class="audio-control playpause"></div>            
                 <div class="audio-control for"></div>
-                <div class="audio-control time-left">10:45</div>
+                <div class="audio-control elapsed">10:45</div>
                 <input type="range"  class="bar time" min="0" max="100" name="" id="">
                 <!-- <progress class="time-bar"></progress> -->
-                <div class="audio-control time-full">20:58</div>
+                <div class="audio-control duration">20:58</div>
                 <div class="audio-control shu"></div>
                 <div class="audio-control vol"></div>
                 <input type="range" class="bar volume" min="0" max="100" name="" id="" >    
                 <!-- <progress></progress>                           -->
             </div>
-        
-            <audio src="music/Ars_Sonor_-_02_-_Never_Give_Up.mp3" controls="controls" class="audio"></audio>
+        <!-- controls="controls" -->
+            <audio src="music/Ars_Sonor_-_02_-_Never_Give_Up.mp3"  class="audio"></audio>
         </div>
     </div>
+    <script src="index.js"></script>    
 </body>
 </html>
