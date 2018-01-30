@@ -54,8 +54,63 @@ function generatePlayLists(data) {
       userLists.appendChild(playList);
     }
   });
-
 }
+
+// let playlistTracks = [
+//     { "id": 21, "title": "Halahula", "artist": "Untitled artist", "duration": 545, "path": "c:/music/halahula.mp3" },
+//     { "id": 412, "title": "No sleep till Brooklyn", "artist": "Beastie Boys", "duration": 312.12, "path": "c:/music/beastie boys/No sleep till Brooklyn.mp3" }
+//   ]
+
+function generateTracks(data) {
+  
+  let trackList = document.querySelector('.track-list');
+  
+  data.forEach(item => {
+
+    let track = document.createElement('div');
+    track.classList.add('track');
+
+    let trackId = document.createElement('div');
+    trackId.classList.add('tr-id');
+    trackId.setAttribute('data-track-id', item.id);
+    trackId.textContent = item.id;
+
+    track.appendChild(trackId);
+
+    let trackTitle = document.createElement('div');
+    trackTitle.classList.add('tr-title');
+    trackTitle.textContent = item.title;
+
+    track.appendChild(trackTitle);
+
+    let trackDuration = document.createElement('div');
+    trackDuration.classList.add('tr-time');
+    trackDuration.textContent = convertSeconds(item.duration);
+
+    track.appendChild(trackDuration);
+
+    trackList.appendChild(track);
+  });
+}
+
+function getTracks() {
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open('GET', `/playlist-tracks`);
+    httpRequest.setRequestHeader('Accept', 'application/json');
+    httpRequest.setRequestHeader("Content-Type", "application/json");
+    httpRequest.send();
+    httpRequest.addEventListener('load', function () {
+      let data = JSON.parse(httpRequest.responseText);
+      console.log('data = responsetext:\n', data);
+      generateTracks(data);
+    });
+  }
+
+window.addEventListener('click', event => {
+  if (event.target.parentElement.classList.contains('alltracks')) {
+    getTracks();
+  }
+});
 
 let audio = document.querySelector('.audio');
 let playpause = document.querySelector('.playpause');

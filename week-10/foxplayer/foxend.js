@@ -13,10 +13,21 @@ let playlists = [
   { "id": 5, "title": "Fox house", "system": 0},
 ]
 
+let playlistTracks = [
+  { "id": 21, "title": "Halahula", "artist": "Untitled artist", "duration": 545, "path": "c:/music/halahula.mp3" },
+  { "id": 412, "title": "No sleep till Brooklyn", "artist": "Beastie Boys", "duration": 312.12, "path": "c:/music/beastie boys/No sleep till Brooklyn.mp3" }
+]
+
 app.get('/playlists', (req, res) => {
   res.status(200);
   res.json(playlists);
 });
+
+app.get('/playlist-tracks', (req, res) => {
+    res.status(200);
+    res.json(playlistTracks);
+  });
+
 
 app.listen(3000, e => {
   if(e){
