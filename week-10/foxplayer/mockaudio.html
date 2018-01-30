@@ -4,15 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Mock</title>
+    <link rel="stylesheet" href="mock.css" type="text/css">
+
 </head>
 <body style="width: 100%;">
-<video autoplay controls="controls">
+<!-- <video autoplay controls="controls">
     <source src="music/Ars_Sonor_-_02_-_Never_Give_Up.mp3" type="audio/mpeg"/>
     <source src="music/Doctor_Turtle_-_Doctor_Talos_Answers_The_Door.mp3" type="audio/mpeg"/>
     <source src="music/Organoid_-_09_-_Purple_Drift.mp3" type="audio/mpeg"/>
-</video>
-<span style="left: 0%; width: 100%;"></span>  
+</video> -->
+
+<div class="audio-container">
+        <div class="self-audio">
+            <div class="audio-control rew"></div>
+            <div class="audio-control playpause"></div>            
+            <div class="audio-control for"></div>
+            <div class="audio-control elapsed">10:45</div>
+            <input type="range"  class="bar time" min="0" max="100" name="" id="">
+            <!-- <progress class="time-bar"></progress> -->
+            <div class="audio-control duration">20:58</div>
+            <div class="audio-control shu"></div>
+            <div class="audio-control vol"></div>
+            <input type="range" class="bar volume" min="0" max="100" name="" id="" >    
+            <!-- <progress></progress>                           -->
+        </div>
+    
+        <audio src="music/Ars_Sonor_-_02_-_Never_Give_Up.mp3" controls="controls" class="audio"></audio>
+    </div>
+<!-- <span style="left: 0%; width: 100%;"></span>   -->
+<script src="mock.js"></script>
 </body>
 </html>
 
