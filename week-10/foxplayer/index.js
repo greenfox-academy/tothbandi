@@ -1,5 +1,16 @@
 'use strict';
+
 const server = 'http://localhost:3000';
+const allTracks = document.querySelector('.alltracks');
+const tracks = document.querySelectorAll('.track');
+const trackList = document.querySelector('.track-list');
+const audio = document.querySelector('.audio');
+const playpause = document.querySelector('.playpause');
+const volume = document.querySelector('.volume');
+const time = document.querySelector('.time');
+const elapsed = document.querySelector('.elapsed');
+const duration = document.querySelector('.duration');
+const myevent = new Event('playplay', {"bubbles":true, "cancelable":false});
 
 getPlayLists();
 
@@ -63,27 +74,29 @@ function generatePlayLists(data) {
 
 function generateTracks(data) {
   
-  let trackList = document.querySelector('.track-list');
+  // let trackList = document.querySelector('.track-list');
   
-  data.forEach(item => {
+  data.forEach((item) => {
 
-    let track = document.createElement('div');
+    const track = document.createElement('div');
     track.classList.add('track');
+    track.setAttribute('data-track-id', item.id);
+    track.setAttribute('data-track-artist', item.artist);
+    track.setAttribute('data-track-path', item.path);
 
-    let trackId = document.createElement('div');
+    const trackId = document.createElement('div');
     trackId.classList.add('tr-id');
-    trackId.setAttribute('data-track-id', item.id);
     trackId.textContent = item.id;
 
     track.appendChild(trackId);
 
-    let trackTitle = document.createElement('div');
+    const trackTitle = document.createElement('div');
     trackTitle.classList.add('tr-title');
     trackTitle.textContent = item.title;
 
     track.appendChild(trackTitle);
 
-    let trackDuration = document.createElement('div');
+    const trackDuration = document.createElement('div');
     trackDuration.classList.add('tr-time');
     trackDuration.textContent = convertSeconds(item.duration);
 
@@ -94,43 +107,65 @@ function generateTracks(data) {
 }
 
 function getTracks() {
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', `/playlist-tracks`);
-    httpRequest.setRequestHeader('Accept', 'application/json');
-    httpRequest.setRequestHeader("Content-Type", "application/json");
-    httpRequest.send();
-    httpRequest.addEventListener('load', function () {
-      let data = JSON.parse(httpRequest.responseText);
-      console.log('data = responsetext:\n', data);
-      generateTracks(data);
-    });
-  }
+  let httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', `/playlist-tracks`);
+  httpRequest.setRequestHeader('Accept', 'application/json');
+  httpRequest.setRequestHeader("Content-Type", "application/json");
+  httpRequest.send();
+  httpRequest.addEventListener('load', function () {
+    let data = JSON.parse(httpRequest.responseText);
+    console.log('data = responsetext:\n', data);
+    generateTracks(data);
+  });
+}
 
-window.addEventListener('click', event => {
+allTracks.addEventListener('click', (event) => {
   if (event.target.parentElement.classList.contains('alltracks')) {
     getTracks();
+    allTracks.classList.add('now-playing');
   }
 });
 
-let audio = document.querySelector('.audio');
-let playpause = document.querySelector('.playpause');
-let volume = document.querySelector('.volume');
-let time = document.querySelector('.time');
-let elapsed = document.querySelector('.elapsed');
-let duration = document.querySelector('.duration');
-console.log(audio);
-console.log(audio.duration);
-volume.value = audio.volume * 100;
-time.value = audio.currentTime * 100 / audio.duration;
+trackList.addEventListener('click', (event) => {
+  let src = event.target.dataset.trackPath;
+  src = `http://127.0.0.1:8887/${src.slice(35)}`;
+  console.log(src);
+  audio.setAttribute('src', src);
+  audio.addEventListener('loadedmetadata', function (e) {
+    loadAudioData(event.target);
+  });
+
+});
+
+
+
+
 
 function convertSeconds(seconds) {
-    let minutes = Math.floor(seconds / 60);
-    seconds = Math.floor(seconds % 60);
-    return `${minutes}:${seconds < 10 ? '0'+ seconds : seconds}`;
+  let minutes = Math.floor(seconds / 60);
+  seconds = Math.floor(seconds % 60);
+  return `${minutes}:${seconds < 10 ? '0'+ seconds : seconds}`;
 }
 
-elapsed.textContent = convertSeconds(audio.currentTime);
-duration.textContent = convertSeconds(audio.duration);
+function loadAudioData(track) {
+  track.classList.add('now-playing');
+  const trackTitle = document.querySelector('.title');
+  trackTitle.textContent = track.querySelector('.tr-title').textContent;
+  const trackNote = document.querySelector('.note');
+  trackNote.textContent = track.dataset.trackArtist;
+  console.log(audio);
+  console.log(audio.duration);
+  volume.value = audio.volume * 100;
+  time.value = audio.currentTime * 100 / audio.duration;
+  elapsed.textContent = convertSeconds(audio.currentTime);
+  duration.textContent = convertSeconds(audio.duration);
+  playpause.style.backgroundImage = 'url(img/play.svg)';
+  
+}
+
+// window.addEventListener('load', e => {
+//   loadAudioData();
+// });
 
 time.addEventListener('input', (e) => {
     audio.currentTime = audio.duration * parseInt(time.value) / 100;
@@ -141,16 +176,14 @@ volume.addEventListener('input', (e) => {
     audio.volume = parseInt(volume.value) / 100;
 } );
 
-playpause.addEventListener('click', function(e)
-{
-  if(audio.paused)
-  {
+playpause.addEventListener('click', (e) => {
+  if (audio.paused) {
+    // window.setInterval(window.dispatchEvent('playplay'), 1000);
     audio.play();
     playpause.style.backgroundImage = 'url(img/pause.svg)';
     console.log(audio.volume);
-  }
-  else
-  {
+  } else {
+    // window.clearInterval();
     audio.pause();
     playpause.style.backgroundImage = 'url(img/play.svg)';
   }
@@ -159,12 +192,22 @@ playpause.addEventListener('click', function(e)
 
 // Add the following events: loadstart, play, ended, progress
 // console.log the event name + "hap pened" to the console
+// window.addEventListener('playplay', (e) => {
+//   time.value = audio.currentTime * 100 / audio.duration;
+//   elapsed.textContent = convertSeconds(audio.currentTime);
+// });
 
 audio.addEventListener('loadstart', function(e) {
     console.log(`event ---> : ${e.type}`);
 });
 
-audio.addEventListener('play', function(e) {
+audio.addEventListener('loadedmetadata', function(e) {
+  duration.textContent = convertSeconds(audio.duration);
+  // console.log(`event ---> : ${e.type}`);
+});
+
+audio.addEventListener('playing', function(e) {
+
     console.log(`event ---> : ${e.type}`);
 });
 
@@ -173,5 +216,8 @@ audio.addEventListener('ended', function(e) {
 });
 
 audio.addEventListener('progress', function(e) {
-    console.log(`event ---> : ${e.type}`);
+  time.value = audio.currentTime * 100 / audio.duration;
+  elapsed.textContent = convertSeconds(audio.currentTime);
+  // duration.textContent = convertSeconds(audio.duration);
+    // console.log(`event ---> : ${e.type}`);
 });
