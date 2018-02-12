@@ -1,88 +1,257 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
-const server = 'http://localhost:3000';
-const allTracks = document.querySelector('.alltracks');
-const tracks = document.querySelectorAll('.track');
-const trackList = document.querySelector('.track-list');
-const audio = document.querySelector('.audio');
-const playpause = document.querySelector('.playpause');
-const volume = document.querySelector('.volume');
-const time = document.querySelector('.time');
-const elapsed = document.querySelector('.elapsed');
-const duration = document.querySelector('.duration');
-const myevent = new Event('playplay', {"bubbles":true, "cancelable":false});
+/* eslint linebreak-style: ["error", "windows"] */
 
-getPlayLists();
+let prevTrack;
+let prevList;
 
-function getPlayLists() {
-  let httpRequest = new XMLHttpRequest();
-  httpRequest.open('GET', `/playlists`);
-  httpRequest.setRequestHeader('Accept', 'application/json');
-  httpRequest.setRequestHeader("Content-Type", "application/json");
-  httpRequest.send();
-  httpRequest.addEventListener('load', function () {
-    let data = JSON.parse(httpRequest.responseText);
-    console.log('data = responsetext:\n', data);
-    generatePlayLists(data);
+function connect(method, query, callback) {
+  const xhr = new XMLHttpRequest();
+  const url = `http://localhost:3000${query}`;
+  xhr.open(method, url);
+  xhr.addEventListener('readystatechange', () => {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      callback(data);
+    }
   });
+  xhr.send();
 }
 
-// let playlists = [
-//     { "id": 1, "title": "Favorites", "system": 1},
-//     { "id": 2, "title": "Music for programming", "system": 0},
-//     { "id": 3, "title": "Driving", "system": 0},
-//     { "id": 5, "title": "Fox house", "system": 0},
-//   ]
+function addNewList() {
+  const newPlayList = window.prompt('Enter the new playlist name.', 'play list name');
+  const doPlayList = window.confirm(`Create list named ${newPlayList} ?`);
+  if (doPlayList) {
+    connect('POST', `/playlists/${newPlayList}`, () => {
+      connect('GET', '/playlists', generatePlayLists);
+    });
+  }
+}
+
+function deletePlayList(event) {
+  if (window.confirm(`Realy delete ${event.target.parentNode.dataset.listTitle}?`)) {
+    connect('DELETE', `/playlists/${event.target.parentNode.dataset.listId}`, () => {
+      connect('GET', '/playlists', generatePlayLists);
+    });
+  }
+}
 
 function generatePlayLists(data) {
-
+  
   let defaultLists = document.querySelector('.default-lists');
   let userLists = document.querySelector('.user-lists');
+  defaultLists.innerHTML = '';
+  let allList = document.createElement('div');
+  allList.classList.add('playlist');
+  allList.classList.add('alltracks');
+  let allTracks = document.createElement('span');
+  allTracks.textContent = 'All tracks';
+  allList.appendChild(allTracks);
+  defaultLists.appendChild(allList);
 
-  data.forEach(item => {
-
+  allTracks.addEventListener('click', () => {
+    if (prevList !== undefined) {
+      prevList.classList.remove('now-playing');
+    }
+    prevList = allTracks.parentNode;
+    allTracks.parentNode.classList.add('now-playing');
+    connect('GET', '/playlist-tracks', generateTracks);
+  });
+  userLists.innerHTML = '';
+  document.querySelector('.track-list').innerHTML = '';
+  
+  data.forEach((item) => {
+    
     let playList = document.createElement('div');
     playList.classList.add('playlist');
     playList.setAttribute('data-list-id', item.id);
-
+    playList.setAttribute('data-list-title', item.title);
+    
     let span = document.createElement('span');
     span.textContent = item.title;
+    span.addEventListener('click', () => {
+      if (prevList !== undefined) {
+        prevList.classList.remove('now-playing');
+      }
+      prevList = span.parentNode;
+      span.parentNode.classList.add('now-playing');
+      connect('GET', `/playlist-tracks/${span.parentNode.dataset.listId}`, generateTracks);
+    });
     playList.appendChild(span);
-
+    
     if (item.system === 1) {
       
       playList.classList.add('favorites');
       defaultLists.appendChild(playList);
-
+      
     } else if (item.system === 0) {
-
+      
       let delButton = document.createElement('div');
       delButton.classList.add('playlist-delete');
-      delButton.textContent = 'x';
-
+      delButton.textContent = 'X';
+      delButton.addEventListener('click', deletePlayList);
+      
       playList.appendChild(delButton);
-
+      
       userLists.appendChild(playList);
     }
   });
+
+  const addList = document.querySelector('.add-list');
+  addList.addEventListener('click', addNewList);
 }
 
-// let playlistTracks = [
-//     { "id": 21, "title": "Halahula", "artist": "Untitled artist", "duration": 545, "path": "c:/music/halahula.mp3" },
-//     { "id": 412, "title": "No sleep till Brooklyn", "artist": "Beastie Boys", "duration": 312.12, "path": "c:/music/beastie boys/No sleep till Brooklyn.mp3" }
-//   ]
+function convertSeconds(seconds) {
+  let minutes = Math.floor(seconds / 60);
+  seconds = Math.floor(seconds % 60);
+  return `${minutes}:${seconds < 10 ? '0'+ seconds : seconds}`;
+}
+
+function addToFavorite(track) {
+  connect('POST', `/playlist-tracks/1/${track.dataset.trackId}`, console.log);
+  const star = document.querySelector('.star');
+  star.style.backgroundImage = 'url(img/starblue.svg)';
+}
+
+function colorStar(data) {
+  const star = document.querySelector('.star');
+  if (data.result) {
+    star.style.backgroundImage = 'url(img/starblue.svg)';
+  } else {
+    star.style.backgroundImage = 'url(img/star.svg)';
+  }
+}
+
+function starFavoriteTrack(track) {
+  connect('POST', `/favorite-track/${track.dataset.trackId}`, colorStar);
+}
+
+function addPlaylistsToDialog(data) {
+  const trackforinsert = document.querySelector('.track-for-insert');
+  const currentTrack = document.querySelector('.currenttrack');
+  trackforinsert.innerHTML = `Insert <b>${currentTrack.dataset.trackTitle}</b> into the chosen playlist`;
+  const lists = document.getElementById('lists');
+  lists.innerHTML = '';
+  const emptyoption = document.createElement('option');
+  lists.appendChild(emptyoption);
+  data.forEach((list, index) => {
+    if (index > 0) {
+      const option = document.createElement('option');
+      option.setAttribute('data-list-id', list.id);
+      option.textContent = list.title;
+      lists.appendChild(option);
+    }
+  });
+  const cancelButton = document.getElementById('cancel');
+  const listDialog = document.getElementById('list-dialog');
+  const save = document.getElementById('save');
+  listDialog.showModal();
+    
+  cancelButton.addEventListener('click', () => {
+    listDialog.close();
+    listDialog.removeAttribute('open');
+  });
+
+  save.addEventListener('click', () => {
+    const listId = lists.options[lists.selectedIndex].dataset.listId;
+    const trackId = currentTrack.dataset.trackId;
+    listDialog.close();
+    listDialog.removeAttribute('open');
+    connect('POST', `/playlist-tracks/${listId}/${trackId}`, console.log);
+  });
+}
+
+function addTrackToList() {
+  connect('GET', '/playlists', addPlaylistsToDialog);
+}
+
+function displayCurrentTrack(track) {
+  let src = track.dataset.trackPath;
+  src = `music/${src.slice(35)}`;
+  const audio = document.querySelector('.audio');
+  audio.setAttribute('src', src);
+  audio.addEventListener('loadedmetadata', () => {
+    const currentTrack = document.querySelector('.currenttrack');
+    currentTrack.setAttribute('data-track-id', track.dataset.trackId);
+    currentTrack.setAttribute('data-track-title', track.dataset.trackTitle);
+    const trackTitle = document.querySelector('.title');
+    trackTitle.textContent = track.dataset.trackTitle;
+    const trackNote = document.querySelector('.note');
+    trackNote.textContent = track.dataset.trackArtist;
+    const volume = document.querySelector('.volume');
+    volume.value = audio.volume * 100;
+    volume.addEventListener('input', (e) => {
+      audio.volume = parseInt(volume.value, 10) / 100;
+    });
+    const elapsed = document.querySelector('.elapsed');
+    elapsed.textContent = convertSeconds(audio.currentTime);
+    const time = document.querySelector('.time');
+    time.value = audio.currentTime * 100 / audio.duration;
+    time.addEventListener('input', (e) => {
+      audio.currentTime = audio.duration * parseInt(time.value, 10) / 100;
+      elapsed.textContent = convertSeconds(audio.currentTime);
+    });
+    const duration = document.querySelector('.duration');
+    duration.textContent = convertSeconds(audio.duration);
+    const playpause = document.querySelector('.playpause');
+    playpause.style.backgroundImage = 'url(img/play.svg)';
+    playpause.addEventListener('click', (e) => {
+      if (audio.paused) {
+        audio.play();
+        playpause.style.backgroundImage = 'url(img/pause.svg)';
+      } else {
+        audio.pause();
+        playpause.style.backgroundImage = 'url(img/play.svg)';
+      }
+    });
+    audio.addEventListener('timeupdate', (e) => {
+      time.value = audio.currentTime * 100 / audio.duration;
+      elapsed.textContent = convertSeconds(audio.currentTime);
+    });
+    const addTrack = document.querySelector('.trackadd');
+    addTrack.addEventListener('click', () => {
+      addTrackToList();
+    });
+    const star = document.querySelector('.star');
+    star.addEventListener('click', () => {
+      addToFavorite(track);
+    });
+    starFavoriteTrack(track);
+  });
+}
+
+function emptyCurrentTrack() {
+  const audio = document.querySelector('.audio');
+  audio.setAttribute('src', '#');
+  const trackTitle = document.querySelector('.title');
+  trackTitle.textContent = 'Current track';
+  const trackNote = document.querySelector('.note');
+  trackNote.textContent = 'artist';
+  const star = document.querySelector('.star');
+  star.removeEventListener('click', () => {});
+}
+
+function loadTrack(event) {
+  if (prevTrack !== undefined) {
+    prevTrack.classList.remove('now-playing');
+  }
+  prevTrack = event.target;
+  event.target.classList.add('now-playing');
+  displayCurrentTrack(event.target);
+}
 
 function generateTracks(data) {
-  
-  // let trackList = document.querySelector('.track-list');
-  
+  emptyCurrentTrack();
+  const trackList = document.querySelector('.track-list');
+  trackList.innerHTML = '';
   data.forEach((item) => {
-
     const track = document.createElement('div');
     track.classList.add('track');
     track.setAttribute('data-track-id', item.id);
     track.setAttribute('data-track-artist', item.artist);
     track.setAttribute('data-track-path', item.path);
+    track.setAttribute('data-track-title', item.title);
+    track.addEventListener('click', loadTrack);     // !!!!!!!!!!!!!   EZ JON
 
     const trackId = document.createElement('div');
     trackId.classList.add('tr-id');
@@ -106,118 +275,4 @@ function generateTracks(data) {
   });
 }
 
-function getTracks() {
-  let httpRequest = new XMLHttpRequest();
-  httpRequest.open('GET', `/playlist-tracks`);
-  httpRequest.setRequestHeader('Accept', 'application/json');
-  httpRequest.setRequestHeader("Content-Type", "application/json");
-  httpRequest.send();
-  httpRequest.addEventListener('load', function () {
-    let data = JSON.parse(httpRequest.responseText);
-    console.log('data = responsetext:\n', data);
-    generateTracks(data);
-  });
-}
-
-allTracks.addEventListener('click', (event) => {
-  if (event.target.parentElement.classList.contains('alltracks')) {
-    getTracks();
-    allTracks.classList.add('now-playing');
-  }
-});
-
-trackList.addEventListener('click', (event) => {
-  let src = event.target.dataset.trackPath;
-  src = `http://127.0.0.1:8887/${src.slice(35)}`;
-  console.log(src);
-  audio.setAttribute('src', src);
-  audio.addEventListener('loadedmetadata', function (e) {
-    loadAudioData(event.target);
-  });
-
-});
-
-
-
-
-
-function convertSeconds(seconds) {
-  let minutes = Math.floor(seconds / 60);
-  seconds = Math.floor(seconds % 60);
-  return `${minutes}:${seconds < 10 ? '0'+ seconds : seconds}`;
-}
-
-function loadAudioData(track) {
-  track.classList.add('now-playing');
-  const trackTitle = document.querySelector('.title');
-  trackTitle.textContent = track.querySelector('.tr-title').textContent;
-  const trackNote = document.querySelector('.note');
-  trackNote.textContent = track.dataset.trackArtist;
-  console.log(audio);
-  console.log(audio.duration);
-  volume.value = audio.volume * 100;
-  time.value = audio.currentTime * 100 / audio.duration;
-  elapsed.textContent = convertSeconds(audio.currentTime);
-  duration.textContent = convertSeconds(audio.duration);
-  playpause.style.backgroundImage = 'url(img/play.svg)';
-  
-}
-
-// window.addEventListener('load', e => {
-//   loadAudioData();
-// });
-
-time.addEventListener('input', (e) => {
-    audio.currentTime = audio.duration * parseInt(time.value) / 100;
-    elapsed.textContent = convertSeconds(audio.currentTime);
-} );
-
-volume.addEventListener('input', (e) => {
-    audio.volume = parseInt(volume.value) / 100;
-} );
-
-playpause.addEventListener('click', (e) => {
-  if (audio.paused) {
-    // window.setInterval(window.dispatchEvent('playplay'), 1000);
-    audio.play();
-    playpause.style.backgroundImage = 'url(img/pause.svg)';
-    console.log(audio.volume);
-  } else {
-    // window.clearInterval();
-    audio.pause();
-    playpause.style.backgroundImage = 'url(img/play.svg)';
-  }
-
-}, false);
-
-// Add the following events: loadstart, play, ended, progress
-// console.log the event name + "hap pened" to the console
-// window.addEventListener('playplay', (e) => {
-//   time.value = audio.currentTime * 100 / audio.duration;
-//   elapsed.textContent = convertSeconds(audio.currentTime);
-// });
-
-audio.addEventListener('loadstart', function(e) {
-    console.log(`event ---> : ${e.type}`);
-});
-
-audio.addEventListener('loadedmetadata', function(e) {
-  duration.textContent = convertSeconds(audio.duration);
-  // console.log(`event ---> : ${e.type}`);
-});
-
-audio.addEventListener('playing', function(e) {
-
-    console.log(`event ---> : ${e.type}`);
-});
-
-audio.addEventListener('ended', function(e) {
-    console.log(`event ---> : ${e.type}`);
-});
-
-audio.addEventListener('progress', function(e) {
-  time.value = audio.currentTime * 100 / audio.duration;
-  elapsed.textContent = convertSeconds(audio.currentTime);
-  // duration.textContent = convertSeconds(audio.duration);
-    // console.log(`event ---> : ${e.type}`);
-});
+connect('GET', '/playlists', generatePlayLists);

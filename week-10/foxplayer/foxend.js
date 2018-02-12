@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
 /* eslint linebreak-style: ["error", "windows"] */
 
@@ -42,17 +42,14 @@ function fillDbTracks() {
     const readableStream = fs.createReadStream(track);
     mm(readableStream, { duration: true }, (err2, metadata) => {
       if (err2) throw err2;
-      // console.log(metadata);
       const values = [
         metadata.title,
         metadata.artist,
         metadata.duration,
         track,
       ];
-      console.log(values);
       connection.query('INSERT INTO tracks (title, artist, duration, path) VALUES (?, ?, ?, ?)', values, (err) => {
         if (err) {
-          console.log(`sql insert error: ${err}`);
         }
       });
       readableStream.close();
@@ -65,28 +62,15 @@ function fillDbTracks() {
 const app = express();
 app.use(express.json());
 app.use(express.static('.'));
-// app.use('C:\\Users\\tothbandi\\Documents\\music\\', express.static('music'));
-
-// let playlists = [
-//   { "id": 1, "title": "Favorites", "system": 1},
-//   { "id": 2, "title": "Music for programming", "system": 0},
-//   { "id": 3, "title": "Driving", "system": 0},
-//   { "id": 5, "title": "Fox house", "system": 0},
-// ];
-
-// let playlistTracks = [
-//   { "id": 21, "title": "Halahula", "artist": "Untitled artist", "duration": 545, "path": "c:/music/halahula.mp3" },
-//   { "id": 412, "title": "No sleep till Brooklyn", "artist": "Beastie Boys", "duration": 312.12, "path": "c:/music/beastie boys/No sleep till Brooklyn.mp3" }
-// ];
+app.get('/', (req, res) => {
+  res.status(200);
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.get('/playlists', (req, res) => {
   let playlists = [];
   connection.query('SELECT * FROM playlists;', (err, rows) => {
-    if (err) {
-      console.log(`sql select error: ${err}`);
-    }
     playlists = rows.map((row) => {
-      console.log(row);
       return {
         id: row.id,
         title: row.playlist,
@@ -98,23 +82,63 @@ app.get('/playlists', (req, res) => {
   });
 });
 
+app.post('/playlists/:newList', (req, res) => {
+  connection.query(`INSERT INTO playlists (playlist, system) VALUES ('${req.params.newList}', 0);`, (err, rows) => {
+    res.status(200);
+    res.json({ inserted: true });
+  });
+});
+
 app.get('/playlist-tracks', (req, res) => {
-  let playlistTracks = [];
   connection.query('SELECT * FROM tracks;', (err, rows) => {
     if (err) {
       console.log(`sql select error: ${err}`);
     }
-    playlistTracks = rows.map((row) => {
-      return {
-        id: row.id,
-        title: row.title,
-        artist: row.artist,
-        duration: row.duration,
-        path: row.path,
-      };
-    });
     res.status(200);
-    res.json(playlistTracks);
+    res.json(rows);
+  });
+});
+
+app.get('/playlist-tracks/:listId', (req, res) => {
+  console.log(req.params.listId);
+  connection.query(`SELECT * FROM tracks T RIGHT JOIN playlist P ON T.id = P.track_id WHERE P.playlist_id =${req.params.listId};`, (err, rows) => {
+    if (err) {
+      console.log(`sql select error: ${err}`);
+    }
+    res.status(200);
+    res.json(rows);
+  });
+});
+
+app.post('/playlist-tracks/:listId/:trackId', (req, res) => {
+  const data = [req.params.listId, req.params.trackId];
+  connection.query('SELECT * FROM playlist WHERE playlist_id = ? AND track_id = ?;', data, (err, rows) => {
+    if (rows.length === 0) {
+      connection.query('INSERT INTO playlist (playlist_id, track_id) VALUES (?, ?);', data, () => {});
+    }
+  });
+  res.status(200);
+  res.json({ result: 'success' });
+});
+
+app.post('/favorite-track/:trackId', (req, res) => {
+  connection.query(`SELECT * FROM playlist WHERE playlist_id = 1 AND track_id = ${req.params.trackId}`, (err, rows) => {
+    if (rows.length === 0) {
+      res.status(200);
+      res.json({ result: false });
+    } else {
+      res.status(200);
+      res.json({ result: true });
+    }
+  });
+});
+
+app.delete('/playlists/:listId', (req, res) => {
+  let id = [req.params.listId];
+  connection.query('DELETE FROM playlist WHERE playlist_id=?;', id, (err, rows) => {
+    connection.query('DELETE FROM playlists WHERE id=?;', id, (err, rows) => {
+      res.json({ result: 'deleted' });
+    });
   });
 });
 
