@@ -7,9 +7,13 @@ let arrowDown;
 sendMessage('GET');
 
 function sendMessage(method, id, direction, event){
-  const server = 'http://secure-reddit.herokuapp.com/simple'; // user
-// const server = 'https://time-radish.glitch.me'; // owner
+  // const server = 'http://secure-reddit.herokuapp.com/simple'; // user
+  // const server = 'https://time-radish.glitch.me'; // owner
+
+  const server = 'http://localhost:3000';
+
   let redditRequest = new XMLHttpRequest();
+
   if(method === 'GET'){
     redditRequest.open('GET', `${server}/posts`);
   } else if(method === 'PUT'){
@@ -21,6 +25,7 @@ function sendMessage(method, id, direction, event){
   redditRequest.onreadystatechange = function(){
     if(redditRequest.readyState === 4){
       let data = JSON.parse(redditRequest.responseText);
+      console.log(redditRequest);
       if(method === 'GET'){
         generatePosts(data);
       } else if (method === 'PUT'){

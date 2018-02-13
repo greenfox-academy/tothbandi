@@ -4,8 +4,8 @@ const titleInput = document.querySelector('.input-title');
 const urlInput = document.querySelector('.input-url');
 const submit = document.querySelector('.link-to');
 // const server = 'http://secure-reddit.herokuapp.com/simple';
-const server = 'https://time-radish.glitch.me';
-
+// const server = 'https://time-radish.glitch.me';
+const server = 'http://localhost:3000';
 
 function sendPost(){
   let title = titleInput.value;
