@@ -204,9 +204,30 @@ function displayCurrentTrack(track) {
         playpause.style.backgroundImage = 'url(img/play.svg)';
       }
     });
-    audio.addEventListener('timeupdate', (e) => {
+    audio.addEventListener('timeupdate', () => {
       time.value = audio.currentTime * 100 / audio.duration;
       elapsed.textContent = convertSeconds(audio.currentTime);
+    });
+    const rew = document.querySelector('.rew');
+    let intervalId;
+    rew.addEventListener('mousedown', () => {
+      intervalId = setInterval(() => { audio.currentTime -= 10; }, 500);
+    });
+    rew.addEventListener('mouseup', () => {
+      clearInterval(intervalId);
+    });
+    rew.addEventListener('click', () => {
+      loadTrack(track.previousSibling);
+    });
+    const forw = document.querySelector('.forw');
+    forw.addEventListener('mousedown', () => {
+      intervalId = setInterval(() => { audio.currentTime += 10; }, 500);
+    });
+    forw.addEventListener('mouseup', () => {
+      clearInterval(intervalId);
+    });
+    forw.addEventListener('click', () => {
+      loadTrack(track.nextSibling);
     });
     const addTrack = document.querySelector('.trackadd');
     addTrack.addEventListener('click', () => {
@@ -224,20 +245,20 @@ function emptyCurrentTrack() {
   const audio = document.querySelector('.audio');
   audio.setAttribute('src', '#');
   const trackTitle = document.querySelector('.title');
-  trackTitle.textContent = 'Current track';
+  trackTitle.textContent = 'Currently playing';
   const trackNote = document.querySelector('.note');
   trackNote.textContent = 'artist';
   const star = document.querySelector('.star');
   star.removeEventListener('click', () => {});
 }
 
-function loadTrack(event) {
+function loadTrack(track) {
   if (prevTrack !== undefined) {
     prevTrack.classList.remove('now-playing');
   }
-  prevTrack = event.target;
-  event.target.classList.add('now-playing');
-  displayCurrentTrack(event.target);
+  prevTrack = track;
+  track.classList.add('now-playing');
+  displayCurrentTrack(track);
 }
 
 function generateTracks(data) {
@@ -251,7 +272,7 @@ function generateTracks(data) {
     track.setAttribute('data-track-artist', item.artist);
     track.setAttribute('data-track-path', item.path);
     track.setAttribute('data-track-title', item.title);
-    track.addEventListener('click', loadTrack);     // !!!!!!!!!!!!!   EZ JON
+    track.addEventListener('click', (e) => { loadTrack(e.target); });
 
     const trackId = document.createElement('div');
     trackId.classList.add('tr-id');
