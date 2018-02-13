@@ -11,16 +11,15 @@ const connection = mysql.createConnection({
     database: 'redditdb'
 });
 
-connection.connect(function(err){
-    if(err){
-      console.log("Error connecting to Db!");
-      return;
-    }
-    console.log("Connection established !");
-});
+// connection.connect(function(err){ //?
+//     if(err){
+//       console.log("Error connecting to Db!");
+//       return;
+//     }
+//     console.log("Connection established !");
+// });
 
 const app = express();
-
 
 app.use(express.json());
 app.use(express.static('webpage'));
@@ -117,7 +116,7 @@ app.put('/posts/:id/:vote', (req, res) => {
             return;
         }
     });
-    connection.query(`SELECT * FROM posts WHERE id = ${connection.escape(id)};`, (err, row) => {
+    connection.query(`SELECT * FROM posts WHERE id = ${connection.escape(id)};`, (err, row) => { // query a querybe !!!!!!
         console.log('vote select', row);
         // rows.forEach(row => {
         //     let post = {};

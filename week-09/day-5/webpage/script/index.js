@@ -18,10 +18,10 @@ function getPosts() {
   redditRequest.setRequestHeader('Accept', 'application/json');
   redditRequest.setRequestHeader("Content-Type", "application/json");
   redditRequest.send();
-  redditRequest.addEventListener('load', function () {
+  redditRequest.addEventListener('load', function () { // send ele !!!
     let data = JSON.parse(redditRequest.responseText);
     console.log('data = responsetext:\n', data);
-    generatePosts(data);
+    // generatePosts(data);
   });
   // redditRequest.onreadystatechange = function(){
   //   if(redditRequest.readyState === redditRequest.DONE){
@@ -101,8 +101,8 @@ window.addEventListener('mouseup',function(event){
   event.target.style.backgroundImage = `url("../assets/${event.target.classList[0]}voted.png")`;
 });
 
-const toNewPost = document.querySelector('.link-to');
-toNewPost.setAttribute('href', 'post.html');
+// const toNewPost = document.querySelector('.link-to');
+// toNewPost.setAttribute('href', 'post.html');
 
 function generatePosts(data){
   console.log(`data:\n ${data}`);
