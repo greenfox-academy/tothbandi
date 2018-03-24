@@ -18,8 +18,10 @@ The student, on their own, is able to:
      -  Commit, add, push, pull
      -  Review other's code
  -  Follow indentation and coding styleguides in their code
-
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.html
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/style.css
+https://github.com/greenfox-academy/huli-szera-frontend/tree/develop/src/app/related-persons
 
  -  Create variables and methods on a given specification
  -  Use conditions and loops:
