@@ -116,7 +116,7 @@ The student, on their own, is able to:
 
 **Choose one from below:** 
 
-  #Frontend for me
+#Frontend for me
 
 ### Backend
 
