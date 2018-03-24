@@ -1,9 +1,8 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 html, body {
@@ -44,12 +43,14 @@ html, body {
     display: flex;
     justify-content: space-between;
 }
+
 .logo-playlists{
     width: 100%;
     height: 10.5rem;
     display: flex;
     flex-direction: column;
 }
+
 .artwork {
     width: 18.67rem;
     height: 10.5rem;
@@ -98,7 +99,6 @@ span{
 }
 
 .add-list{
-    display: inline-block;
     width: 3rem;
     height: 3rem;
     line-height: 3rem;
@@ -205,7 +205,6 @@ span{
 }
 
 .tr-time{
-    display: inline-block;
     float: right;
 }
 
@@ -361,19 +360,3 @@ span{
 #lists > option {
     font-size: 1rem;
 }
-
-/* audio::-webkit-media-controls-panel
-audio::-webkit-media-controls-mute-button
-audio::-webkit-media-controls-play-button
-audio::-webkit-media-controls-timeline-container
-audio::-webkit-media-controls-current-time-display
-audio::-webkit-media-controls-time-remaining-display
-audio::-webkit-media-controls-timeline
-audio::-webkit-media-controls-volume-slider-container
-audio::-webkit-media-controls-volume-slider
-audio::-webkit-media-controls-seek-back-button
-audio::-webkit-media-controls-seek-forward-button
-audio::-webkit-media-controls-fullscreen-button
-audio::-webkit-media-controls-rewind-button
-audio::-webkit-media-controls-return-to-realtime-button
-audio::-webkit-media-controls-toggle-closed-captions-button */
