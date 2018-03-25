@@ -79,16 +79,38 @@ For the final exam, please prepare links to your GitHub repository for each of t
 
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js#L207
 
+https://github.com/greenfox-academy/huli-szera-frontend/blob/develop/src/app/related-persons/related-persons.component.ts#L15
+
+https://github.com/greenfox-academy/huli-szera-frontend/blob/develop/src/app/related-persons/related-persons.component.ts#L55
+
+https://github.com/greenfox-academy/huli-szera-frontend/blob/develop/src/app/add-client-form/add-client-form.component.html#L93
+
+https://github.com/greenfox-academy/huli-szera-frontend/blob/develop/src/app/add-client-form/add-client-form.component.ts#L79
+
 - Initiating an AJAX request
+
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js#L8
+
 - Using callbacks
+
+https://github.com/greenfox-academy/huli-szera-frontend/blob/develop/src/app/related-persons/related-persons.component.ts#L38
+
 - Creating an Express endpoint in Node.js
+
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/foxend.js#L70
+
 - Creating a database call in Node.js
+
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/foxend.js#L70
+
 - Unit test using a testing library
 
 *Important:* No code example provided means ZERO point.
 
 
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.html
+
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js
 
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/style.css
 
