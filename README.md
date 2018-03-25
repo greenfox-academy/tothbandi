@@ -76,6 +76,9 @@ The student, on their own, is able to:
 For the final exam, please prepare links to your GitHub repository for each of these topics:
 
 - Event handling frontend side
+
+https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js#L207
+
 - Initiating an AJAX request
 - Using callbacks
 - Creating an Express endpoint in Node.js
@@ -84,7 +87,6 @@ For the final exam, please prepare links to your GitHub repository for each of t
 
 *Important:* No code example provided means ZERO point.
 
-https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js
 
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.html
 
