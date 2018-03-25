@@ -85,8 +85,11 @@ For the final exam, please prepare links to your GitHub repository for each of t
 *Important:* No code example provided means ZERO point.
 
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.js
+
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/index.html
+
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/style.css
+
 https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/foxend.js
 
 https://github.com/greenfox-academy/huli-szera-frontend/tree/develop/src/app/related-persons
