@@ -105,6 +105,10 @@ https://github.com/greenfox-academy/tothbandi/blob/master/week-10/foxplayer/foxe
 
 - Unit test using a testing library
 
+https://github.com/greenfox-academy/tothbandi/blob/master/week-09/day-3/testing/sum_test.js
+
+https://github.com/greenfox-academy/huli-szera-frontend/blob/feature/story/TUR-73/src/app/client.service.spec.ts
+
 *Important:* No code example provided means ZERO point.
 
 
